@@ -931,6 +931,28 @@
                         <input type="text" id="descripcion" class="form-control" required placeholder="Ej: VAN PASAJEROS K07S">
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Grupo</label>
+                        <input type="text" id="grupo" class="form-control" placeholder="Grupo">
+                    </div>
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input type="text" id="codigo" class="form-control" placeholder="Código">
+                    </div>
+                    <div class="form-group">
+                        <label>VIN</label>
+                        <input type="text" id="vin" class="form-control" placeholder="Número VIN">
+                    </div>
+                    <div class="form-group">
+                        <label>Bodega</label>
+                        <input type="text" id="bodega" class="form-control" placeholder="Ej: Vehiculos SDC">
+                    </div>
+                    <div class="form-group">
+                        <label>Importador</label>
+                        <input type="text" id="importador" class="form-control" placeholder="Nombre importador">
+                    </div>
+                </div>
 
                 <div class="section-title">💰 Facturación Inchcape</div>
                 <div class="form-row">
@@ -939,23 +961,63 @@
                         <input type="date" id="fecha_factura" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>No. Factura</label>
+                        <input type="text" id="no_factura" class="form-control" placeholder="Número de factura">
+                    </div>
+                    <div class="form-group">
+                        <label>Vencimiento Factura</label>
+                        <input type="date" id="vencimiento_factura" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Días Faltantes Factura</label>
+                        <input type="number" id="dias_faltantes_factura" class="form-control" value="0">
+                    </div>
+                    <div class="form-group">
                         <label>Cantidad</label>
                         <input type="number" id="cantidad" class="form-control" value="1" min="1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Valor</label>
+                        <input type="number" id="valor" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>IVA</label>
+                        <input type="number" id="iva" class="form-control" value="0" step="0.01">
                     </div>
                     <div class="form-group">
                         <label>% IVA</label>
                         <input type="number" id="porcentaje_iva" class="form-control" value="19" step="0.01">
                     </div>
                     <div class="form-group">
-                        <label>IPOCONSUMO</label>
-                        <input type="number" id="porcentaje_iva3" class="form-control" value="0" step="0.01">
+                        <label>Impoconsumo</label>
+                        <input type="number" id="ipoconsumo_factura" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Valor Total</label>
+                        <input type="number" id="valor_total" class="form-control" value="0" step="0.01">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Precio</label>
+                        <input type="number" id="precio" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Retenciones</label>
+                        <input type="number" id="retenciones" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Descuentos</label>
+                        <input type="number" id="descuentos" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
                         <label>Precio + IVA (calc.)</label>
                         <input type="text" id="precio_iva_display" class="form-control" readonly>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label>Apoyo Comercial</label>
                         <input type="number" id="apoyo_comercial" class="form-control" value="0" step="0.01">
@@ -964,8 +1026,6 @@
                         <label>Margen Var (calc.)</label>
                         <input type="text" id="margen_var_display" class="form-control" readonly>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
                         <label>No. NC</label>
                         <input type="text" id="no_nc" class="form-control" placeholder="Ej: PDNC-10016198">
@@ -1003,19 +1063,37 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Valor a Pagar</label>
+                        <input type="number" id="valor_a_pagar" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
                         <label>Fecha Desembolso</label>
                         <input type="date" id="fecha_desembolso" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Vencimiento Leasing</label>
-                        <input type="date" id="vencimiento_leasing" class="form-control">
+                        <label>Vencimiento Factoring</label>
+                        <input type="date" id="vencimiento_factoring" class="form-control">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Vencimiento Leasing</label>
+                        <input type="date" id="vencimiento_leasing" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Días Faltantes Factoring</label>
+                        <input type="number" id="dias_faltantes_factoring" class="form-control" value="0">
+                    </div>
+                    <div class="form-group">
                         <label>Días Faltantes (calc.)</label>
                         <input type="text" id="dias_faltantes_display" class="form-control" readonly>
                     </div>
+                    <div class="form-group">
+                        <label>Entidad Financiación</label>
+                        <input type="text" id="entidad_financiacion" class="form-control" placeholder="Entidad bancaria">
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label>Fecha de Pago</label>
                         <input type="date" id="fecha_pago" class="form-control">
@@ -1023,6 +1101,10 @@
                     <div class="form-group">
                         <label>Intereses Generados (calc.)</label>
                         <input type="text" id="intereses_generados_display" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Desembolso - Pago</label>
+                        <input type="date" id="fecha_desembolso_pago" class="form-control">
                     </div>
                 </div>
 
@@ -1032,7 +1114,6 @@
                         <label>Fecha de Venta</label>
                         <input type="date" id="fecha_venta" class="form-control">
                     </div>
-                    <!-- MODIFICACIÓN: Sede ahora es un select con opciones fijas -->
                     <div class="form-group">
                         <label>Sede</label>
                         <select id="sede" class="form-control">
@@ -1041,6 +1122,10 @@
                             <option value="CCG">CCG</option>
                             <option value="Vehitomors">Vehitomors</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="text" id="numero" class="form-control" placeholder="Número de venta">
                     </div>
                     <div class="form-group">
                         <label>ID Cliente</label>
@@ -1078,6 +1163,14 @@
                         <label>Precio Neto (Venta)</label>
                         <input type="number" id="precio_neto_venta" class="form-control" value="0" step="0.01">
                     </div>
+                    <div class="form-group">
+                        <label>Valor Utilidad</label>
+                        <input type="number" id="valor_utilidad" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>% Utilidad</label>
+                        <input type="number" id="porcentaje_utilidad" class="form-control" value="0" step="0.01">
+                    </div>
                 </div>
 
                 <div class="section-title">📝 Acuerdos Comerciales</div>
@@ -1091,6 +1184,10 @@
                         <input type="date" id="fecha_recepcion_transformacion" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>Comisión Gcia.</label>
+                        <input type="number" id="comision_gcia" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
                         <label>Comisión</label>
                         <input type="number" id="comision" class="form-control" value="0" step="0.01">
                     </div>
@@ -1100,10 +1197,13 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <!-- MODIFICACIÓN: Matrícula y SOAT ahora son tipo fecha -->
+                    <div class="form-group">
+                        <label>Fecha Matrícula</label>
+                        <input type="date" id="fecha_matricula" class="form-control">
+                    </div>
                     <div class="form-group">
                         <label>Matrícula</label>
-                        <input type="date" id="matricula" class="form-control">
+                        <input type="text" id="matricula" class="form-control" placeholder="Número de placa">
                     </div>
                     <div class="form-group">
                         <label>SOAT</label>
@@ -1124,8 +1224,36 @@
                         <input type="text" id="total_gastos" class="form-control" readonly>
                     </div>
                     <div class="form-group">
+                        <label>Utilidad Neta</label>
+                        <input type="number" id="utilidad_neta" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Rentabilidad</label>
+                        <input type="number" id="rentabilidad" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
                         <label>Fecha Entrega Final</label>
                         <input type="date" id="fecha_entrega_final" class="form-control">
+                    </div>
+                </div>
+
+                <div class="section-title">🏦 Datos Financieros</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Valor Desembolso</label>
+                        <input type="number" id="valor_desembolso" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Saldo</label>
+                        <input type="number" id="saldo" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Comisión Bancaria Vendedor</label>
+                        <input type="number" id="comision_bancaria_vendedor" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Comisión Bancaria Conseccionario</label>
+                        <input type="number" id="comision_bancaria_conseccionario" class="form-control" value="0" step="0.01">
                     </div>
                 </div>
 
@@ -1587,32 +1715,55 @@
             const parseM = val => parseFloat((val || '').toString().replace(/[$,\s]/g, '')) || 0;
 
             const registro = {
+                // Solicitud
                 fecha_solicitud: g('fecha_solicitud').value,
-                descripcion: g('descripcion').value,
+                grupo: g('grupo').value,
+                codigo: g('codigo').value,
                 marca: g('marca').value,
+                descripcion: g('descripcion').value,
+                vin: g('vin').value,
+                bodega: g('bodega').value,
+                importador: g('importador').value,
                 demo: g('demo').value,
                 anio_facturacion: g('anio_facturacion').value,
+                // Facturación Inchcape
                 fecha_factura: g('fecha_factura').value,
+                no_factura: g('no_factura').value,
+                vencimiento_factura: g('vencimiento_factura').value,
+                dias_faltantes_factura: parseFloat(g('dias_faltantes_factura').value) || 0,
                 cantidad: parseFloat(g('cantidad').value) || 0,
+                valor: parseFloat(g('valor').value) || 0,
+                iva: parseFloat(g('iva').value) || 0,
                 porcentaje_iva: parseFloat(g('porcentaje_iva').value) || 0,
-                porcentaje_iva3: parseFloat(g('porcentaje_iva3').value) || 0,
+                ipoconsumo_factura: parseFloat(g('ipoconsumo_factura').value) || 0,
+                valor_total: parseFloat(g('valor_total').value) || 0,
+                precio: parseFloat(g('precio').value) || 0,
+                retenciones: parseFloat(g('retenciones').value) || 0,
+                descuentos: parseFloat(g('descuentos').value) || 0,
                 precio_iva: parseM(g('precio_iva_display').value),
                 apoyo_comercial: parseFloat(g('apoyo_comercial').value) || 0,
                 margen_var: parseM(g('margen_var_display').value),
                 no_nc: g('no_nc').value,
                 costo_total: 0,
+                // Recepción
                 fecha_llegada: g('fecha_llegada').value,
+                // Factoring & Leasing
                 factoring: g('factoring').value,
                 estado: g('estado').value,
+                valor_a_pagar: parseFloat(g('valor_a_pagar').value) || 0,
                 fecha_desembolso: g('fecha_desembolso').value,
+                vencimiento_factoring: g('vencimiento_factoring').value,
                 vencimiento_leasing: g('vencimiento_leasing').value,
+                dias_faltantes_factoring: parseFloat(g('dias_faltantes_factoring').value) || 0,
+                entidad_financiacion: g('entidad_financiacion').value,
                 dias_faltantes: parseInt(g('dias_faltantes_display').value) || 0,
                 fecha_pago: g('fecha_pago').value,
-                // MODIFICACIÓN: intereses_generados es calculado, se guarda el valor calculado
                 intereses_generados: parseM(g('intereses_generados_display').value),
+                fecha_desembolso_pago: g('fecha_desembolso_pago').value,
+                // Venta
                 fecha_venta: g('fecha_venta').value,
-                // MODIFICACIÓN: sede ahora guarda el valor del select
                 sede: g('sede').value,
+                numero: g('numero').value,
                 id_cliente: g('id_cliente').value,
                 cliente: g('cliente').value,
                 fecha_factura_venta: g('fecha_factura_venta').value,
@@ -1620,19 +1771,30 @@
                 porcentaje_iva_venta: parseFloat(g('porcentaje_iva_venta').value) || 0,
                 ipoconsumo: parseFloat(g('ipoconsumo').value) || 0,
                 precio_iva_venta: parseM(g('precio_iva_venta_display').value),
-                // MODIFICACIÓN: precio_neto eliminado del guardado
                 precio_neto_venta: parseFloat(g('precio_neto_venta').value) || 0,
+                valor_utilidad: parseFloat(g('valor_utilidad').value) || 0,
+                porcentaje_utilidad: parseFloat(g('porcentaje_utilidad').value) || 0,
+                // Acuerdos Comerciales
                 fecha_envio_transformacion: g('fecha_envio_transformacion').value,
                 fecha_recepcion_transformacion: g('fecha_recepcion_transformacion').value,
+                comision_gcia: parseFloat(g('comision_gcia').value) || 0,
                 comision: parseFloat(g('comision').value) || 0,
                 costo_financiero: parseFloat(g('costo_financiero').value) || 0,
-                // MODIFICACIÓN: matricula y soat ahora son fechas
+                fecha_matricula: g('fecha_matricula').value,
                 matricula: g('matricula').value,
                 soat: g('soat').value,
                 impuestos: parseFloat(g('impuestos').value) || 0,
                 otros: parseFloat(g('otros').value) || 0,
                 total_gastos: parseM(g('total_gastos').value),
+                utilidad_neta: parseFloat(g('utilidad_neta').value) || 0,
+                rentabilidad: parseFloat(g('rentabilidad').value) || 0,
                 fecha_entrega_final: g('fecha_entrega_final').value,
+                // Datos Financieros
+                valor_desembolso: parseFloat(g('valor_desembolso').value) || 0,
+                saldo: parseFloat(g('saldo').value) || 0,
+                comision_bancaria_vendedor: parseFloat(g('comision_bancaria_vendedor').value) || 0,
+                comision_bancaria_conseccionario: parseFloat(g('comision_bancaria_conseccionario').value) || 0,
+                // Adicionales
                 vendedor: g('vendedor').value,
                 observaciones: g('observaciones').value,
                 creado_por: currentUser?.uid,
@@ -1945,15 +2107,32 @@
         guardarBtn.textContent = 'Actualizar Registro';
         editActions.classList.remove('hidden');
         setTimeout(() => {
-            // MODIFICACIÓN: se quitó precio_neto, matricula y soat son fechas, intereses es calculado
-            const fields = ['fecha_solicitud','descripcion','marca','demo','anio_facturacion','fecha_factura',
-                'cantidad','porcentaje_iva','porcentaje_iva3','apoyo_comercial','no_nc',
-                'fecha_llegada','factoring','estado','fecha_desembolso','vencimiento_leasing','fecha_pago',
-                'fecha_venta','sede','id_cliente','cliente','fecha_factura_venta',
-                'cantidad_venta','porcentaje_iva_venta','ipoconsumo','precio_neto_venta',
-                'fecha_envio_transformacion','fecha_recepcion_transformacion',
-                'comision','costo_financiero','matricula','soat',
-                'impuestos','otros','fecha_entrega_final','vendedor','observaciones'];
+            const fields = [
+                // Solicitud
+                'fecha_solicitud','grupo','codigo','marca','descripcion','vin','bodega','importador','demo','anio_facturacion',
+                // Facturación Inchcape
+                'fecha_factura','no_factura','vencimiento_factura','dias_faltantes_factura','cantidad','valor','iva',
+                'porcentaje_iva','ipoconsumo_factura','valor_total','precio','retenciones','descuentos',
+                'precio_iva_display','apoyo_comercial','margen_var_display','no_nc','costo_total_display',
+                // Recepción
+                'fecha_llegada',
+                // Factoring & Leasing
+                'factoring','estado','valor_a_pagar','fecha_desembolso','vencimiento_factoring','vencimiento_leasing',
+                'dias_faltantes_factoring','entidad_financiacion','dias_faltantes_display','fecha_pago',
+                'intereses_generados_display','fecha_desembolso_pago',
+                // Venta
+                'fecha_venta','sede','numero','id_cliente','cliente','fecha_factura_venta','cantidad_venta',
+                'porcentaje_iva_venta','ipoconsumo','precio_iva_venta_display','precio_neto_venta',
+                'valor_utilidad','porcentaje_utilidad',
+                // Acuerdos Comerciales
+                'fecha_envio_transformacion','fecha_recepcion_transformacion','comision_gcia','comision',
+                'costo_financiero','fecha_matricula','matricula','soat','impuestos','otros','total_gastos',
+                'utilidad_neta','rentabilidad','fecha_entrega_final',
+                // Datos Financieros
+                'valor_desembolso','saldo','comision_bancaria_vendedor','comision_bancaria_conseccionario',
+                // Adicionales
+                'vendedor','observaciones'
+            ];
             fields.forEach(k => {
                 const el = document.getElementById(k);
                 if (el && registro[k] !== undefined) {
