@@ -954,7 +954,7 @@
                     </div>
                 </div>
 
-                <div class="section-title">💰 Facturación Inchcape</div>
+                <div class="section-title">💰 Facturación Importador</div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Fecha Factura</label>
@@ -1001,20 +1001,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Precio</label>
-                        <input type="number" id="precio" class="form-control" value="0" step="0.01">
-                    </div>
-                    <div class="form-group">
                         <label>Retenciones</label>
                         <input type="number" id="retenciones" class="form-control" value="0" step="0.01">
                     </div>
                     <div class="form-group">
                         <label>Descuentos</label>
                         <input type="number" id="descuentos" class="form-control" value="0" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label>Precio + IVA (calc.)</label>
-                        <input type="text" id="precio_iva_display" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="form-row">
@@ -1031,7 +1023,7 @@
                         <input type="text" id="no_nc" class="form-control" placeholder="Ej: PDNC-10016198">
                     </div>
                     <div class="form-group">
-                        <label>Costo Total (calc.)</label>
+                        <label>Valor Total Unidad (calc.)</label>
                         <input type="text" id="costo_total_display" class="form-control" readonly>
                     </div>
                 </div>
@@ -1044,14 +1036,11 @@
                     </div>
                 </div>
 
-                <div class="section-title">🏦 Factoring & Leasing</div>
+                <div class="section-title">🏦 Factoring</div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Factoring</label>
-                        <select id="factoring" class="form-control">
-                            <option value="No">No</option>
-                            <option value="Sí">Sí</option>
-                        </select>
+                        <input type="text" id="factoring" class="form-control" placeholder="Nombre de entidad factoring">
                     </div>
                     <div class="form-group">
                         <label>Estado</label>
@@ -1063,8 +1052,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Valor a Pagar</label>
-                        <input type="number" id="valor_a_pagar" class="form-control" value="0" step="0.01">
+                        <label>Valor</label>
+                        <input type="number" id="valor_factoring" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Intereses</label>
+                        <input type="number" id="intereses_factoring" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Valor a Pagar (calc.)</label>
+                        <input type="text" id="valor_a_pagar_display" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>Fecha Desembolso</label>
@@ -1077,34 +1074,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Vencimiento Leasing</label>
-                        <input type="date" id="vencimiento_leasing" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Días Faltantes Factoring</label>
-                        <input type="number" id="dias_faltantes_factoring" class="form-control" value="0">
-                    </div>
-                    <div class="form-group">
                         <label>Días Faltantes (calc.)</label>
                         <input type="text" id="dias_faltantes_display" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Entidad Financiación</label>
-                        <input type="text" id="entidad_financiacion" class="form-control" placeholder="Entidad bancaria">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
                         <label>Fecha de Pago</label>
                         <input type="date" id="fecha_pago" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Intereses Generados (calc.)</label>
-                        <input type="text" id="intereses_generados_display" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Fecha Desembolso - Pago</label>
-                        <input type="date" id="fecha_desembolso_pago" class="form-control">
                     </div>
                 </div>
 
@@ -1146,23 +1121,43 @@
                         <input type="number" id="cantidad_venta" class="form-control" value="1">
                     </div>
                     <div class="form-group">
+                        <label>Valor</label>
+                        <input type="number" id="valor_venta" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
                         <label>% IVA (Venta)</label>
                         <input type="number" id="porcentaje_iva_venta" class="form-control" value="19">
                     </div>
                     <div class="form-group">
-                        <label>Ipoconsumo</label>
+                        <label>IVA</label>
+                        <input type="text" id="iva_venta_display" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Impoconsumo</label>
                         <input type="number" id="ipoconsumo" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>% Impoconsumo</label>
+                        <input type="number" id="porcentaje_ipoconsumo_venta" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Retenciones</label>
+                        <input type="number" id="retenciones_venta" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Descuentos</label>
+                        <input type="number" id="descuentos_venta" class="form-control" value="0" step="0.01">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Precio+IVA Venta (calc.)</label>
-                        <input type="text" id="precio_iva_venta_display" class="form-control" readonly>
+                        <label>Valor Total (calc.)</label>
+                        <input type="text" id="valor_total_venta_display" class="form-control" readonly>
                     </div>
-                    <div class="form-group">
-                        <label>Precio Neto (Venta)</label>
-                        <input type="number" id="precio_neto_venta" class="form-control" value="0" step="0.01">
-                    </div>
+                </div>
+
+                <div class="section-title">📝 Acuerdos Comerciales</div>
+                <div class="form-row">
                     <div class="form-group">
                         <label>Valor Utilidad</label>
                         <input type="number" id="valor_utilidad" class="form-control" value="0" step="0.01">
@@ -1171,9 +1166,6 @@
                         <label>% Utilidad</label>
                         <input type="number" id="porcentaje_utilidad" class="form-control" value="0" step="0.01">
                     </div>
-                </div>
-
-                <div class="section-title">📝 Acuerdos Comerciales</div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Fecha Envío Transformación</label>
@@ -1206,8 +1198,16 @@
                         <input type="text" id="matricula" class="form-control" placeholder="Número de placa">
                     </div>
                     <div class="form-group">
+                        <label>Valor Matrícula</label>
+                        <input type="number" id="valor_matricula" class="form-control" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
                         <label>SOAT</label>
                         <input type="date" id="soat" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Valor SOAT</label>
+                        <input type="number" id="valor_soat" class="form-control" value="0" step="0.01">
                     </div>
                     <div class="form-group">
                         <label>Impuestos</label>
@@ -1470,20 +1470,42 @@
                 </div>
                 <div class="import-body" id="import-body">
                     <div class="import-section" style="margin-bottom:0;">
-                        <h4>Importar desde Excel</h4>
-                        <div class="form-group">
-                            <label>Seleccionar archivo (XLSX, XLS, CSV)</label>
-                            <input type="file" id="import-file" class="file-input" accept=".xlsx,.xls,.csv">
-                        </div>
-                        <div class="action-row">
-                            <button id="importar-btn" class="btn btn-success btn-sm">Importar datos</button>
-                            <button id="descargar-template" class="btn btn-ghost btn-sm">Descargar plantilla</button>
+                        <h4>Importar / Exportar datos</h4>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+                            <div>
+                                <h5 style="font-size:12px; color:var(--text2); margin-bottom:10px;">📊 Importar desde Excel/JSON</h5>
+                                <div class="form-group">
+                                    <label>Seleccionar archivo (XLSX, XLS, CSV, JSON)</label>
+                                    <input type="file" id="import-file" class="file-input" accept=".xlsx,.xls,.csv,.json">
+                                </div>
+                                <div class="action-row">
+                                    <button id="importar-btn" class="btn btn-success btn-sm">Importar datos</button>
+                                    <button id="descargar-template" class="btn btn-ghost btn-sm">Descargar plantilla</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 style="font-size:12px; color:var(--text2); margin-bottom:10px;">📋 Vista previa del archivo</h5>
+                                <div id="import-preview" style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:12px; font-size:11px; color:var(--text2); max-height:150px; overflow-y:auto;">
+                                    Seleccione un archivo para ver la información
+                                </div>
+                                <div id="import-stats" style="margin-top:10px; font-size:11px; color:var(--text3);">
+                                    Sin datos cargados
+                                </div>
+                            </div>
                         </div>
                         <div id="import-progress" class="progress-bar">
                             <div class="progress-bar-fill" id="import-progress-fill"></div>
                         </div>
                         <div id="import-result" class="success-message"></div>
                         <div id="import-error" class="error-message"></div>
+                        
+                        <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+                            <h5 style="font-size:12px; color:var(--text2); margin-bottom:10px;">⚠️ Acciones peligrosas</h5>
+                            <div class="action-row">
+                                <button id="eliminar-todos-btn" class="btn btn-danger btn-sm" onclick="confirmarEliminarTodos()">🗑️ Eliminar todos los registros</button>
+                                <button id="exportar-json-btn" class="btn btn-ghost btn-sm" onclick="exportarJSON()">📥 Exportar como JSON</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1624,51 +1646,89 @@
 
     // ── CALC ──
     function calcularValores() {
-        // Facturación Inchcape
-        const precioNetoVenta = parseFloat(document.getElementById('precio_neto_venta')?.value) || 0;
+        // Facturación Importador
         const iva = parseFloat(document.getElementById('porcentaje_iva')?.value) || 0;
         const apoyo = parseFloat(document.getElementById('apoyo_comercial')?.value) || 0;
+        const valorTotal = parseFloat(document.getElementById('valor_total')?.value) || 0;
+        const retenciones = parseFloat(document.getElementById('retenciones')?.value) || 0;
+        const descuentos = parseFloat(document.getElementById('descuentos')?.value) || 0;
+        
+        // IVA = valor * % IVA
+        const valor = parseFloat(document.getElementById('valor')?.value) || 0;
+        const ivaCalculado = valor * (iva / 100);
+        document.getElementById('iva').value = ivaCalculado.toFixed(2);
 
-        // Precio + IVA se calcula a partir del precio neto de venta y el IVA de facturación
-        const precioIVA = precioNetoVenta + (precioNetoVenta * iva / 100);
-        const margen = precioIVA + apoyo;
-        document.getElementById('precio_iva_display').value = formatMoney(precioIVA);
-        document.getElementById('costo_total_display').value = formatMoney(0);
-        document.getElementById('margen_var_display').value = formatMoney(margen);
+        // Valor Total = valor + IVA + Impoconsumo
+        const ipoconsumoFactura = parseFloat(document.getElementById('ipoconsumo_factura')?.value) || 0;
+        const valorTotalCalc = valor + ivaCalculado + ipoconsumoFactura;
+        document.getElementById('valor_total').value = valorTotalCalc.toFixed(2);
 
-        // Días faltantes para leasing
-        const vencimiento = document.getElementById('vencimiento_leasing')?.value;
-        if (vencimiento) {
-            const dias = Math.ceil((new Date(vencimiento) - new Date()) / 86400000);
-            document.getElementById('dias_faltantes_display').value = dias > 0 ? dias : 0;
+        // Margen Var = valor_total - retenciones - descuentos - apoyo_comercial
+        const margenVar = valorTotalCalc - retenciones - descuentos - apoyo;
+        document.getElementById('margen_var_display').value = formatMoney(margenVar);
+        
+        // Valor Total Unidad = valor_total - retenciones - descuentos - apoyo_comercial - margen_var
+        const valorTotalUnidad = valorTotal - retenciones - descuentos - apoyo - margenVar;
+        document.getElementById('costo_total_display').value = formatMoney(valorTotalUnidad);
+
+        // Días Faltantes Factura = vencimiento_factura - fecha_factura
+        const fechaFactura = document.getElementById('fecha_factura')?.value;
+        const vencimientoFactura = document.getElementById('vencimiento_factura')?.value;
+        if (fechaFactura && vencimientoFactura) {
+            const diff = Math.ceil((new Date(vencimientoFactura) - new Date(fechaFactura)) / 86400000);
+            document.getElementById('dias_faltantes_factura').value = diff > 0 ? diff : 0;
         }
 
-        // Precio + IVA venta
+        // IVA Venta = valor * % IVA (Venta) / 100
+        const valorVenta = parseFloat(document.getElementById('valor_venta')?.value) || 0;
         const ivaVenta = parseFloat(document.getElementById('porcentaje_iva_venta')?.value) || 0;
-        document.getElementById('precio_iva_venta_display').value = formatMoney(precioNetoVenta + (precioNetoVenta * ivaVenta / 100));
+        const ivaVentaCalc = valorVenta * (ivaVenta / 100);
+        document.getElementById('iva_venta_display').value = formatMoney(ivaVentaCalc);
+        
+        // Ipoconsumo Venta = valor * % Ipoconsumo / 100
+        const porcentajeIpoconsumoVenta = parseFloat(document.getElementById('porcentaje_ipoconsumo_venta')?.value) || 0;
+        const ipoconsumoVentaCalc = valorVenta * (porcentajeIpoconsumoVenta / 100);
+        document.getElementById('ipoconsumo').value = ipoconsumoVentaCalc.toFixed(2);
+        
+        // Valor Total = valor + iva + ipoconsumo - retenciones - descuentos
+        const retencionesVenta = parseFloat(document.getElementById('retenciones_venta')?.value) || 0;
+        const descuentosVenta = parseFloat(document.getElementById('descuentos_venta')?.value) || 0;
+        const valorTotalVenta = valorVenta + ivaVentaCalc + ipoconsumoVentaCalc - retencionesVenta - descuentosVenta;
+        document.getElementById('valor_total_venta_display').value = formatMoney(valorTotalVenta);
 
-        // MODIFICACIÓN: Intereses generados = calculado automáticamente
-        // Fórmula: intereses = costo_financiero * días_faltantes / 365 (si hay leasing activo)
-        const costoFin = parseFloat(document.getElementById('costo_financiero')?.value) || 0;
-        const diasFaltantes = parseInt(document.getElementById('dias_faltantes_display')?.value) || 0;
-        const factoring = document.getElementById('factoring')?.value;
-        let interesesCalculados = 0;
-        if (factoring === 'Sí' && costoFin > 0 && diasFaltantes > 0) {
-            // Interés simple: monto financiado * tasa diaria * días
-            interesesCalculados = costoFin * diasFaltantes;
+        // Valor a Pagar = Valor + Intereses (Factoring)
+        const valorFactoring = parseFloat(document.getElementById('valor_factoring')?.value) || 0;
+        const interesesFactoring = parseFloat(document.getElementById('intereses_factoring')?.value) || 0;
+        document.getElementById('valor_a_pagar_display').value = formatMoney(valorFactoring + interesesFactoring);
+
+        // Días Faltantes Factoring = vencimiento_factoring - fecha_desembolso
+        const fechaDesembolso = document.getElementById('fecha_desembolso')?.value;
+        const vencimientoFactoring = document.getElementById('vencimiento_factoring')?.value;
+        if (fechaDesembolso && vencimientoFactoring) {
+            const diasFaltantes = Math.ceil((new Date(vencimientoFactoring) - new Date(fechaDesembolso)) / 86400000);
+            document.getElementById('dias_faltantes_display').value = diasFaltantes > 0 ? diasFaltantes : 0;
         }
-        document.getElementById('intereses_generados_display').value = formatMoney(interesesCalculados);
 
-        // Total gastos (matrícula y SOAT ahora son fechas, no se suman)
+        // Total gastos = Comisión Gcia. + Comisión + Costo Financiero + Valor Matrícula + Valor SOAT + Impuestos + Otros
         const comision = parseFloat(document.getElementById('comision')?.value) || 0;
+        const comisionGcia = parseFloat(document.getElementById('comision_gcia')?.value) || 0;
+        const valorMatricula = parseFloat(document.getElementById('valor_matricula')?.value) || 0;
+        const valorSoat = parseFloat(document.getElementById('valor_soat')?.value) || 0;
         const imp = parseFloat(document.getElementById('impuestos')?.value) || 0;
         const otros = parseFloat(document.getElementById('otros')?.value) || 0;
-        document.getElementById('total_gastos').value = formatMoney(comision + costoFin + imp + otros);
+        document.getElementById('total_gastos').value = formatMoney(comisionGcia + comision + costoFin + valorMatricula + valorSoat + imp + otros);
     }
 
-    // Campos que disparan recálculo (se quitó precio_neto, matricula y soat; se agregó precio_neto_venta)
-    ['cantidad','precio_neto_venta','porcentaje_iva','apoyo_comercial','vencimiento_leasing',
-     'porcentaje_iva_venta','comision','costo_financiero','impuestos','otros','factoring'].forEach(id => {
+    // Campos que disparan recálculo
+    const camposRecalculo = [
+        'cantidad','porcentaje_iva','apoyo_comercial',
+        'porcentaje_iva_venta','comision','comision_gcia','costo_financiero','impuestos','otros','factoring',
+        'valor_total','retenciones','descuentos','fecha_factura','vencimiento_factura','valor',
+        'valor_matricula','valor_soat','ipoconsumo_factura','iva','valor_factoring','intereses_factoring',
+        'vencimiento_factoring','fecha_desembolso','valor_venta',
+        'porcentaje_ipoconsumo_venta','retenciones_venta','descuentos_venta'
+    ];
+    camposRecalculo.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', calcularValores);
@@ -1740,26 +1800,22 @@
                 precio: parseFloat(g('precio').value) || 0,
                 retenciones: parseFloat(g('retenciones').value) || 0,
                 descuentos: parseFloat(g('descuentos').value) || 0,
-                precio_iva: parseM(g('precio_iva_display').value),
                 apoyo_comercial: parseFloat(g('apoyo_comercial').value) || 0,
                 margen_var: parseM(g('margen_var_display').value),
                 no_nc: g('no_nc').value,
                 costo_total: 0,
                 // Recepción
                 fecha_llegada: g('fecha_llegada').value,
-                // Factoring & Leasing
+                // Factoring
                 factoring: g('factoring').value,
                 estado: g('estado').value,
-                valor_a_pagar: parseFloat(g('valor_a_pagar').value) || 0,
+                valor_factoring: parseFloat(g('valor_factoring').value) || 0,
+                intereses_factoring: parseFloat(g('intereses_factoring').value) || 0,
+                valor_a_pagar: parseFloat(g('valor_factoring').value) || 0 + parseFloat(g('intereses_factoring').value) || 0,
                 fecha_desembolso: g('fecha_desembolso').value,
                 vencimiento_factoring: g('vencimiento_factoring').value,
-                vencimiento_leasing: g('vencimiento_leasing').value,
-                dias_faltantes_factoring: parseFloat(g('dias_faltantes_factoring').value) || 0,
-                entidad_financiacion: g('entidad_financiacion').value,
                 dias_faltantes: parseInt(g('dias_faltantes_display').value) || 0,
                 fecha_pago: g('fecha_pago').value,
-                intereses_generados: parseM(g('intereses_generados_display').value),
-                fecha_desembolso_pago: g('fecha_desembolso_pago').value,
                 // Venta
                 fecha_venta: g('fecha_venta').value,
                 sede: g('sede').value,
@@ -1768,10 +1824,14 @@
                 cliente: g('cliente').value,
                 fecha_factura_venta: g('fecha_factura_venta').value,
                 cantidad_venta: parseFloat(g('cantidad_venta').value) || 0,
+                valor_venta: parseFloat(g('valor_venta').value) || 0,
                 porcentaje_iva_venta: parseFloat(g('porcentaje_iva_venta').value) || 0,
+                iva_venta: parseM(g('iva_venta_display').value),
                 ipoconsumo: parseFloat(g('ipoconsumo').value) || 0,
-                precio_iva_venta: parseM(g('precio_iva_venta_display').value),
-                precio_neto_venta: parseFloat(g('precio_neto_venta').value) || 0,
+                porcentaje_ipoconsumo_venta: parseFloat(g('porcentaje_ipoconsumo_venta').value) || 0,
+                retenciones_venta: parseFloat(g('retenciones_venta').value) || 0,
+                descuentos_venta: parseFloat(g('descuentos_venta').value) || 0,
+                valor_total_venta: parseM(g('valor_total_venta_display').value),
                 valor_utilidad: parseFloat(g('valor_utilidad').value) || 0,
                 porcentaje_utilidad: parseFloat(g('porcentaje_utilidad').value) || 0,
                 // Acuerdos Comerciales
@@ -1782,7 +1842,10 @@
                 costo_financiero: parseFloat(g('costo_financiero').value) || 0,
                 fecha_matricula: g('fecha_matricula').value,
                 matricula: g('matricula').value,
+                valor_matricula: parseFloat(g('valor_matricula').value) || 0,
                 soat: g('soat').value,
+                soat: g('soat').value,
+                valor_soat: parseFloat(g('valor_soat').value) || 0,
                 impuestos: parseFloat(g('impuestos').value) || 0,
                 otros: parseFloat(g('otros').value) || 0,
                 total_gastos: parseM(g('total_gastos').value),
@@ -1950,12 +2013,10 @@
         document.getElementById('stock-completados').textContent = completados;
 
         // ── EXTRA KPIs ──
-        const totalIntereses = registros.reduce((s, r) => s + (r.intereses_generados || 0), 0);
-        document.getElementById('total-intereses').textContent = formatMoney(totalIntereses);
         const hoy = new Date();
         const leasingVencido = registros.filter(r => {
-            if (!r.vencimiento_leasing) return false;
-            return new Date(r.vencimiento_leasing) < hoy;
+            if (!r.vencimiento_factoring) return false;
+            return new Date(r.vencimiento_factoring) < hoy;
         }).length;
         document.getElementById('total-leasing-vencido').textContent = leasingVencido;
 
@@ -2067,9 +2128,9 @@
         // ── ALERTAS LEASING ──
         const hoyTs = Date.now();
         const alertas = registros
-            .filter(r => r.vencimiento_leasing && r.factoring === 'Sí')
+            .filter(r => r.vencimiento_factoring && r.factoring)
             .map(r => {
-                const dias = Math.ceil((new Date(r.vencimiento_leasing) - hoyTs) / 86400000);
+                const dias = Math.ceil((new Date(r.vencimiento_factoring) - hoyTs) / 86400000);
                 return { ...r, diasRestantes: dias };
             })
             .filter(r => r.diasRestantes <= 60)
@@ -2089,7 +2150,7 @@
                         <div class="alert-cliente">${r.cliente || 'Sin cliente'}
                             <span class="alert-badge ${badgeClass}">${label}</span>
                         </div>
-                        <div class="alert-dias">${r.descripcion || ''} · Vence: ${new Date(r.vencimiento_leasing).toLocaleDateString('es-CO')}</div>
+                        <div class="alert-dias">${r.descripcion || ''} · Vence: ${new Date(r.vencimiento_factoring).toLocaleDateString('es-CO')}</div>
                     </div>`;
             }).join('');
         }
@@ -2112,21 +2173,21 @@
                 'fecha_solicitud','grupo','codigo','marca','descripcion','vin','bodega','importador','demo','anio_facturacion',
                 // Facturación Inchcape
                 'fecha_factura','no_factura','vencimiento_factura','dias_faltantes_factura','cantidad','valor','iva',
-                'porcentaje_iva','ipoconsumo_factura','valor_total','precio','retenciones','descuentos',
-                'precio_iva_display','apoyo_comercial','margen_var_display','no_nc','costo_total_display',
+                'porcentaje_iva','ipoconsumo_factura','valor_total','retenciones','descuentos',
+                'apoyo_comercial','margen_var_display','no_nc','costo_total_display',
                 // Recepción
                 'fecha_llegada',
-                // Factoring & Leasing
-                'factoring','estado','valor_a_pagar','fecha_desembolso','vencimiento_factoring','vencimiento_leasing',
-                'dias_faltantes_factoring','entidad_financiacion','dias_faltantes_display','fecha_pago',
-                'intereses_generados_display','fecha_desembolso_pago',
+                // Factoring
+                'factoring','estado','valor_factoring','intereses_factoring','valor_a_pagar_display','fecha_desembolso','vencimiento_factoring',
+                'dias_faltantes_display','fecha_pago',
                 // Venta
                 'fecha_venta','sede','numero','id_cliente','cliente','fecha_factura_venta','cantidad_venta',
-                'porcentaje_iva_venta','ipoconsumo','precio_iva_venta_display','precio_neto_venta',
+                'valor_venta','porcentaje_iva_venta','iva_venta_display','ipoconsumo','porcentaje_ipoconsumo_venta',
+                'retenciones_venta','descuentos_venta','valor_total_venta_display',
                 'valor_utilidad','porcentaje_utilidad',
                 // Acuerdos Comerciales
                 'fecha_envio_transformacion','fecha_recepcion_transformacion','comision_gcia','comision',
-                'costo_financiero','fecha_matricula','matricula','soat','impuestos','otros','total_gastos',
+                'costo_financiero','fecha_matricula','matricula','valor_matricula','soat','valor_soat','impuestos','otros','total_gastos',
                 'utilidad_neta','rentabilidad','fecha_entrega_final',
                 // Datos Financieros
                 'valor_desembolso','saldo','comision_bancaria_vendedor','comision_bancaria_conseccionario',
@@ -2193,9 +2254,9 @@
             r.fecha_solicitud,r.descripcion,r.marca,r.demo,r.anio_facturacion,r.fecha_factura,
             r.cantidad,r.porcentaje_iva,r.porcentaje_iva3,r.precio_iva,r.apoyo_comercial,
             r.margen_var,r.no_nc,r.costo_total,r.fecha_llegada,r.factoring,r.estado,r.fecha_desembolso,
-            r.vencimiento_leasing,r.dias_faltantes,r.fecha_pago,r.intereses_generados,r.fecha_venta,
+            r.vencimiento_factoring,r.dias_faltantes,r.fecha_pago,r.fecha_venta,
             r.sede,r.id_cliente,r.cliente,r.fecha_factura_venta,r.cantidad_venta,r.porcentaje_iva_venta,
-            r.ipoconsumo,r.precio_iva_venta,r.precio_neto_venta,
+            r.ipoconsumo,
             r.fecha_envio_transformacion,r.fecha_recepcion_transformacion,
             r.comision,r.costo_financiero,r.matricula,r.soat,r.impuestos,r.otros,r.total_gastos,
             r.fecha_entrega_final,r.vendedor,r.observaciones
@@ -2206,34 +2267,138 @@
         showNotification('Excel exportado correctamente');
     });
 
-    // ── IMPORT EXCEL ──
+    // ── IMPORT EXCEL / JSON ──
+    let datosImportacion = [];
+    
+    importFile?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const fileName = file.name.toLowerCase();
+        const reader = new FileReader();
+        
+        if (fileName.endsWith('.json')) {
+            reader.onload = (evt) => {
+                try {
+                    const data = JSON.parse(evt.target.result);
+                    datosImportacion = Array.isArray(data) ? data : [data];
+                    mostrarVistaPrevia(datosImportacion);
+                } catch (err) {
+                    document.getElementById('import-preview').innerHTML = '<span style="color:var(--red)">Error al parsear JSON</span>';
+                    document.getElementById('import-stats').textContent = '';
+                }
+            };
+            reader.readAsText(file);
+        } else {
+            reader.onload = async (evt) => {
+                try {
+                    datosImportacion = await importarDesdeExcel(file);
+                    mostrarVistaPrevia(datosImportacion);
+                } catch (err) {
+                    document.getElementById('import-preview').innerHTML = '<span style="color:var(--red)">Error al leer archivo</span>';
+                    document.getElementById('import-stats').textContent = '';
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    });
+    
+    function mostrarVistaPrevia(registros) {
+        const preview = document.getElementById('import-preview');
+        const stats = document.getElementById('import-stats');
+        
+        if (!registros || registros.length === 0) {
+            preview.innerHTML = 'No se encontraron registros válidos';
+            stats.textContent = '';
+            return;
+        }
+        
+        const clientes = new Set(registros.map(r => r.cliente).filter(Boolean));
+        const marcas = new Set(registros.map(r => r.marca).filter(Boolean));
+        const estados = {};
+        registros.forEach(r => {
+            const e = r.estado || 'Sin estado';
+            estados[e] = (estados[e] || 0) + 1;
+        });
+        
+        stats.textContent = `${registros.length} registros | ${clientes.size} clientes | ${marcas.size} marcas`;
+        
+        preview.innerHTML = `
+            <div style="margin-bottom:8px; font-weight:600; color:var(--accent);">Primer registro:</div>
+            <div style="margin-bottom:8px; line-height:1.6;">
+                <div><strong>Cliente:</strong> ${registros[0].cliente || '-'}</div>
+                <div><strong>Descripción:</strong> ${(registros[0].descripcion || '').substring(0, 40)}...</div>
+                <div><strong>Marca:</strong> ${registros[0].marca || '-'}</div>
+                <div><strong>Vendedor:</strong> ${registros[0].vendedor || '-'}</div>
+            </div>
+            <div style="border-top:1px solid var(--border); padding-top:8px; margin-top:8px;">
+                <div style="font-weight:600; color:var(--text2); margin-bottom:4px;">Estados:</div>
+                ${Object.entries(estados).map(([e, c]) => `<span style="margin-right:8px;">• ${e}: ${c}</span>`).join('')}
+            </div>
+        `;
+    }
+
     importarBtn?.addEventListener('click', async () => {
         if (!importFile.files?.length) { importError.textContent = 'Selecciona un archivo primero'; return; }
+        if (datosImportacion.length === 0) { importError.textContent = 'No hay datos para importar. Selecciona un archivo primero.'; return; }
+        
         importProgress.style.display = 'block';
         importProgressFill.style.width = '0%';
         importResult.textContent = ''; importError.textContent = '';
+        
         try {
             showLoader();
-            importProgressFill.style.width = '30%';
-            const registros = await importarDesdeExcel(importFile.files[0]);
-            importProgressFill.style.width = '60%';
-            if (!registros.length) throw new Error('No se encontraron registros válidos');
+            importProgressFill.style.width = '10%';
+            
+            const total = datosImportacion.length;
             let ok = 0, fail = 0;
-            for (let i = 0; i < registros.length; i++) {
+            
+            for (let i = 0; i < datosImportacion.length; i++) {
                 try {
-                    const reg = { ...registros[i], creado_por: currentUser?.uid, creado_por_email: currentUser?.email, fecha_creacion: new Date().toISOString(), timestamp: Date.now() };
-                    await database.ref('registros').push().set(reg);
+                    const reg = { 
+                        ...datosImportacion[i], 
+                        creado_por: currentUser?.uid, 
+                        creado_por_email: currentUser?.email, 
+                        fecha_creacion: new Date().toISOString(), 
+                        timestamp: Date.now(),
+                        uid: datosImportacion[i].uid || null
+                    };
+                    
+                    if (reg.uid) {
+                        await database.ref(`registros/${reg.uid}`).set(reg);
+                    } else {
+                        delete reg.uid;
+                        await database.ref('registros').push().set(reg);
+                    }
                     ok++;
-                    importProgressFill.style.width = (60 + ((i + 1) / registros.length * 40)) + '%';
                 } catch { fail++; }
+                
+                const progress = Math.round((i + 1) / total * 90) + 10;
+                importProgressFill.style.width = progress + '%';
             }
-            importResult.textContent = `Importación: ${ok} exitosos, ${fail} fallidos`;
+            
+            importProgressFill.style.width = '100%';
+            importResult.textContent = `Importación completada: ${ok} registros importados, ${fail} fallidos`;
+            
+            datosImportacion = [];
+            importFile.value = '';
+            document.getElementById('import-preview').innerHTML = 'Seleccione un archivo para ver la información';
+            document.getElementById('import-stats').textContent = 'Sin datos cargados';
+            
             if (currentUserRole === 'admin') cargarTodosLosRegistros();
             cargarMisRegistros();
-            importFile.value = '';
             showNotification(`Importación exitosa: ${ok} registros`);
-        } catch (e) { importError.textContent = 'Error: ' + e.message; showNotification('Error en importación', 'error'); }
-        finally { hideLoader(); setTimeout(() => { importProgress.style.display = 'none'; importProgressFill.style.width = '0%'; }, 2000); }
+        } catch (e) { 
+            importError.textContent = 'Error: ' + e.message; 
+            showNotification('Error en importación', 'error'); 
+        }
+        finally { 
+            hideLoader(); 
+            setTimeout(() => { 
+                importProgress.style.display = 'none'; 
+                importProgressFill.style.width = '0%'; 
+            }, 3000); 
+        }
     });
 
     function importarDesdeExcel(file) {
@@ -2254,7 +2419,7 @@
                         headers.forEach((h, idx) => {
                             const val = row[idx];
                             const key = h.toLowerCase().replace(/[^a-z0-9_]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'');
-                            if (/precio|apoyo|margen|intereses|comisi|costo|impuest|gastos|cantidad|porcentaje|ipoconsumo/i.test(h)) {
+                            if (/precio|apoyo|margen|intereses|comisi|costo|impuest|gastos|cantidad|porcentaje|ipoconsumo|valor|iva|retenciones|descuentos/i.test(h)) {
                                 reg[key] = parseFloat(typeof val === 'string' ? val.replace(/[$,]/g,'') : val) || 0;
                             } else if (/fecha|matricula|soat/i.test(h) && val) {
                                 reg[key] = typeof val === 'number'
@@ -2262,7 +2427,7 @@
                                     : String(val);
                             } else { reg[key] = val ?? ''; }
                         });
-                        if (reg.fecha_solicitud && reg.cliente) registros.push(reg);
+                        if (reg.descripcion || reg.cliente) registros.push(reg);
                     }
                     resolve(registros);
                 } catch (err) { reject(err); }
@@ -2271,23 +2436,80 @@
             reader.readAsArrayBuffer(file);
         });
     }
+    
+    // ── EXPORTAR JSON ──
+    window.exportarJSON = () => {
+        if (todosLosRegistros.length === 0) {
+            showNotification('No hay datos para exportar', 'error');
+            return;
+        }
+        const dataStr = JSON.stringify(todosLosRegistros, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `vehidiesel_export_${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showNotification(`Exportados ${todosLosRegistros.length} registros como JSON`);
+    };
+    
+    // ── ELIMINAR TODOS ──
+    window.confirmarEliminarTodos = () => {
+        if (!confirm('⚠️ ¿Está seguro de eliminar TODOS los registros?\n\nEsta acción no se puede deshacer.\n\nPara confirmar, haga clic en Aceptar.')) return;
+        if (!confirm('🚨 ÚLTIMA ADVERTENCIA\n\nSe eliminarán ' + todosLosRegistros.length + ' registros permanentemente.\n\n¿Continuar?')) return;
+        
+        if (currentUserRole !== 'admin') {
+            showNotification('Solo el administrador puede eliminar todos los registros', 'error');
+            return;
+        }
+        
+        eliminarTodosLosRegistros();
+    };
+    
+    async function eliminarTodosLosRegistros() {
+        try {
+            showLoader();
+            await database.ref('registros').remove();
+            todosLosRegistros = [];
+            renderizarTablaAdmin([]);
+            actualizarEstadisticas([]);
+            showNotification('Todos los registros han sido eliminados');
+        } catch (e) {
+            showNotification('Error al eliminar registros: ' + e.message, 'error');
+        } finally {
+            hideLoader();
+        }
+    }
 
     // ── TEMPLATE DOWNLOAD ──
     descargarTemplate?.addEventListener('click', () => {
         const data = [
-            ['Fecha Solicitud','descripcion','MARCA','DEMO','AÑO','fecha_factura','cantidad','porcentaje_iva',
-             'porcentaje_iva3','Precio+Iva','APOYO CCIAL','MARGEN VAR','No. NC','Costo Total',
-             'Fecha de llegada','Factoring','Estado','Fecha de Desembolso','Vencimiento Leasing',
-             'Días Faltantes Leasing','Fecha de Pago','Intereses Generados','Fecha de Venta','Sede',
-             'Id_Cliente','cliente','fecha_factura_venta','cantidad_venta','porcentaje_iva_venta',
-             'Ipoconsumo','Precio+Iva_venta','Precio Neto Venta','Fecha envio transformación',
-             'Fecha de recepción de transformación','Comisión','Costo Financiero','MATRICULA (Fecha)',
-             'SOAT (Fecha)','IMPUESTOS','OTROS','TOTAL GASTOS','Fecha de Entrega Final','Vendedor','Observaciones'],
-            ['2024-03-03','VAN PASAJEROS K07S','SDC','No','2024','2024-03-01','1','19','0','67990000',
-             '0','3450000','PDNC-10016198','0','2024-03-05','No','Activo','','2024-12-31','273',
-             '','0','2024-03-03','CCC','290093','CLIENTE EJEMPLO','2024-03-01','1','19','0',
-             '67990000','57134453','','','0','0','2024-03-10','2024-01-01','0','0','0',
-             '2024-03-10','VENDEDOR EJEMPLO','Observaciones']
+            ['Fecha Solicitud','Grupo','Codigo','Marca','Descripcion','VIN','Bodega','Importador','Demo','Anio Facturacion',
+             'Fecha Factura','No Factura','Vencimiento Factura','Dias Faltantes Factura','Cantidad','Valor','IVA',
+             'Porcentaje IVA','Ipoconsumo Factura','Valor Total','Precio','Retenciones','Descuentos','Precio+Iva',
+             'Apoyo Comercial','Margen Var','No NC','Costo Total',
+             'Fecha Llegada','Factoring','Estado','Valor a Pagar','Fecha Desembolso','Vencimiento Factoring',
+             'Vencimiento Leasing','Dias Faltantes Factoring','Entidad Financiacion','Dias Faltantes','Fecha Pago',
+             'Intereses Generados','Fecha Desembolso Pago',
+             'Fecha Venta','Sede','Numero','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
+             'Porcentaje IVA Venta','Ipoconsumo','Precio+Iva Venta','Precio Neto Venta','Valor Utilidad',
+             'Porcentaje Utilidad',
+             'Fecha Envio Transformacion','Fecha Recepcion Transformacion','Comision Gcia','Comision',
+             'Costo Financiero','Fecha Matricula','Matricula','SOAT','Impuestos','Otros','Total Gastos',
+             'Utilidad Neta','Rentabilidad','Fecha Entrega Final',
+             'Valor Desembolso','Saldo','Comision Bancaria Vendedor','Comision Bancaria Conseccionario',
+             'Vendedor','Observaciones'],
+            ['2024-03-03','','','SDC','VAN PASAJEROS K07S','','','','No','2024',
+             '2024-03-01','','','0','1','0','0','19','0','0','67990000','0','0','67990000',
+             '0','1142689','PDNC-10016198','51992353',
+             '','No','Activo','0','','','','0','','','','','0','',
+             '2024-03-03','CCC','1','290093','CLIENTE EJEMPLO','2024-03-01','1','19','0',
+             '67990000','57134453','5142100','8.99',
+             '','','0','285672','0','','','2024-01-01','0','0','285672',
+             '0','','',
+             '67990000','0','0','0',
+             'VENDEDOR EJEMPLO','Observaciones del registro']
         ];
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(data), 'Plantilla Vehidiesel');
