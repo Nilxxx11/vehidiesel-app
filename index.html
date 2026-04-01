@@ -923,7 +923,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Año</label>
+                        <label>Modelo</label>
                         <input type="number" id="anio_facturacion" class="form-control" value="2024">
                     </div>
                     <div class="form-group">
@@ -934,11 +934,12 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Grupo</label>
-                        <input type="text" id="grupo" class="form-control" placeholder="Grupo">
-                    </div>
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input type="text" id="codigo" class="form-control" placeholder="Código">
+                        <select id="grupo" class="form-control">
+                            <option value="">Seleccionar</option>
+                            <option value="Vehículos Livianos">Vehículos Livianos</option>
+                            <option value="Vehículos Pesados">Vehículos Pesados</option>
+                            <option value="Maquinas">Maquinas</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>VIN</label>
@@ -1223,14 +1224,6 @@
                         <input type="text" id="total_gastos" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Utilidad Neta</label>
-                        <input type="number" id="utilidad_neta" class="form-control" value="0" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label>Rentabilidad</label>
-                        <input type="number" id="rentabilidad" class="form-control" value="0" step="0.01">
-                    </div>
-                    <div class="form-group">
                         <label>Fecha Entrega Final</label>
                         <input type="date" id="fecha_entrega_final" class="form-control">
                     </div>
@@ -1238,6 +1231,10 @@
 
                 <div class="section-title">🏦 Datos Financieros</div>
                 <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha Desembolso Pago</label>
+                        <input type="date" id="fecha_desembolso_pago" class="form-control">
+                    </div>
                     <div class="form-group">
                         <label>Valor Desembolso</label>
                         <input type="number" id="valor_desembolso" class="form-control" value="0" step="0.01">
@@ -1803,7 +1800,6 @@
                 // Solicitud
                 fecha_solicitud: g('fecha_solicitud').value,
                 grupo: g('grupo').value,
-                codigo: g('codigo').value,
                 marca: g('marca').value,
                 descripcion: g('descripcion').value,
                 vin: g('vin').value,
@@ -1859,7 +1855,6 @@
                 valor_total_venta: parseM(g('valor_total_venta_display').value),
                 valor_utilidad: parseFloat(g('valor_utilidad').value) || 0,
                 porcentaje_utilidad: parseFloat(g('porcentaje_utilidad').value) || 0,
-                // Acuerdos Comerciales
                 fecha_envio_transformacion: g('fecha_envio_transformacion').value,
                 fecha_recepcion_transformacion: g('fecha_recepcion_transformacion').value,
                 comision_gcia: parseFloat(g('comision_gcia').value) || 0,
@@ -1874,10 +1869,9 @@
                 impuestos: parseFloat(g('impuestos').value) || 0,
                 otros: parseFloat(g('otros').value) || 0,
                 total_gastos: parseM(g('total_gastos').value),
-                utilidad_neta: parseFloat(g('utilidad_neta').value) || 0,
-                rentabilidad: parseFloat(g('rentabilidad').value) || 0,
                 fecha_entrega_final: g('fecha_entrega_final').value,
                 // Datos Financieros
+                fecha_desembolso_pago: g('fecha_desembolso_pago').value,
                 valor_desembolso: parseFloat(g('valor_desembolso').value) || 0,
                 saldo: parseFloat(g('saldo').value) || 0,
                 comision_bancaria_vendedor: parseFloat(g('comision_bancaria_vendedor').value) || 0,
@@ -2195,7 +2189,7 @@
         setTimeout(() => {
             const fields = [
                 // Solicitud
-                'fecha_solicitud','grupo','codigo','marca','descripcion','vin','bodega','importador','demo','anio_facturacion',
+                'fecha_solicitud','grupo','marca','descripcion','vin','bodega','importador','demo','anio_facturacion',
                 // Facturación Inchcape
                 'fecha_factura','no_factura','vencimiento_factura','dias_faltantes_factura','cantidad','valor','iva',
                 'porcentaje_iva','ipoconsumo_factura','valor_total','retenciones','descuentos',
@@ -2213,9 +2207,9 @@
                 // Acuerdos Comerciales
                 'fecha_envio_transformacion','fecha_recepcion_transformacion','comision_gcia','comision',
                 'costo_financiero','fecha_matricula','matricula','valor_matricula','soat','valor_soat','impuestos','otros','total_gastos',
-                'utilidad_neta','rentabilidad','fecha_entrega_final',
+                'fecha_entrega_final',
                 // Datos Financieros
-                'valor_desembolso','saldo','comision_bancaria_vendedor','comision_bancaria_conseccionario',
+                'fecha_desembolso_pago','valor_desembolso','saldo','comision_bancaria_vendedor','comision_bancaria_conseccionario',
                 // Adicionales
                 'vendedor','observaciones'
             ];
@@ -2522,7 +2516,7 @@
              'Porcentaje Utilidad',
              'Fecha Envio Transformacion','Fecha Recepcion Transformacion','Comision Gcia','Comision',
              'Costo Financiero','Fecha Matricula','Matricula','SOAT','Impuestos','Otros','Total Gastos',
-             'Utilidad Neta','Rentabilidad','Fecha Entrega Final',
+             'Fecha Entrega Final',
              'Valor Desembolso','Saldo','Comision Bancaria Vendedor','Comision Bancaria Conseccionario',
              'Vendedor','Observaciones'],
             ['2024-03-03','','','SDC','VAN PASAJEROS K07S','','','','No','2024',
