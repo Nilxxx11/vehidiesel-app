@@ -147,6 +147,8 @@
         select.form-control { cursor: pointer; }
         select.form-control option { background: var(--surface2); }
         textarea.form-control { resize: vertical; min-height: 72px; }
+        
+        .currency { text-align: right !important; font-family: 'DM Mono', monospace !important; font-size: 12px !important; }
 
         .form-row {
             display: grid;
@@ -985,7 +987,7 @@
                     </div>
                     <div class="form-group">
                         <label>IVA</label>
-                        <input type="number" id="iva" class="form-control" value="0" step="0.01">
+                        <input type="text" id="iva" class="form-control currency" value="0" readonly>
                     </div>
                     <div class="form-group">
                         <label>% IVA</label>
@@ -1016,16 +1018,16 @@
                         <input type="number" id="apoyo_comercial" class="form-control" value="0" step="0.01">
                     </div>
                     <div class="form-group">
-                        <label>Margen Var (calc.)</label>
-                        <input type="text" id="margen_var_display" class="form-control" readonly>
+                        <label>Margen Var</label>
+                        <input type="number" id="margen_var" class="form-control" value="0" step="0.01">
                     </div>
                     <div class="form-group">
                         <label>No. NC</label>
                         <input type="text" id="no_nc" class="form-control" placeholder="Ej: PDNC-10016198">
                     </div>
                     <div class="form-group">
-                        <label>Valor Total Unidad (calc.)</label>
-                        <input type="text" id="costo_total_display" class="form-control" readonly>
+                        <label>Valor Total a Pagar</label>
+                        <input type="text" id="costo_total_display" class="form-control currency" readonly>
                     </div>
                 </div>
 
@@ -1049,7 +1051,7 @@
                             <option value="">Seleccionar</option>
                             <option value="Activo">Activo</option>
                             <option value="Pendiente">Pendiente</option>
-                            <option value="Completado">Completado</option>
+                            <option value="Pago">Pago</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1068,7 +1070,7 @@
                     </div>
                     <div class="form-group">
                         <label>Valor a Pagar (calc.)</label>
-                        <input type="text" id="valor_a_pagar_display" class="form-control" readonly>
+                        <input type="text" id="valor_a_pagar_display" class="form-control currency" readonly>
                     </div>
                     <div class="form-group">
                         <label>Vencimiento Factoring</label>
@@ -1098,7 +1100,8 @@
                             <option value="">Seleccionar sede</option>
                             <option value="CCC">CCC</option>
                             <option value="CCG">CCG</option>
-                            <option value="Vehitomors">Vehitomors</option>
+                            <option value="Vehimotors Cartagena">Vehimotors Cartagena</option>
+                            <option value="Vehimotors Bucaramanga">Vehimotors Bucaramanga</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1129,7 +1132,7 @@
                     </div>
                     <div class="form-group">
                         <label>IVA</label>
-                        <input type="text" id="iva_venta_display" class="form-control" readonly>
+                        <input type="text" id="iva_venta_display" class="form-control currency" readonly>
                     </div>
                 </div>
                 <div class="form-row">
@@ -1151,7 +1154,7 @@
                     </div>
                     <div class="form-group">
                         <label>Valor Total (calc.)</label>
-                        <input type="text" id="valor_total_venta_display" class="form-control" readonly>
+                        <input type="text" id="valor_total_venta_display" class="form-control currency" readonly>
                     </div>
                 </div>
                 <div class="form-row">
@@ -1221,7 +1224,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Total Gastos (calc.)</label>
-                        <input type="text" id="total_gastos" class="form-control" readonly>
+                        <input type="text" id="total_gastos" class="form-control currency" readonly>
                     </div>
                     <div class="form-group">
                         <label>Fecha Entrega Final</label>
@@ -1661,6 +1664,38 @@
     function formatMoney(v) {
         return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(v).replace('COP', '$');
     }
+    
+    function parseMoney(str) {
+        if (!str) return 0;
+        return parseFloat(String(str).replace(/[$\s.,]/g, '').replace(',', '.')) || 0;
+    }
+    
+    function formatCurrencyInput(input) {
+        const val = parseMoney(input.value);
+        if (val > 0) {
+            input.value = formatMoney(val);
+        } else {
+            input.value = '';
+        }
+    }
+    
+    function formatCurrencyFields() {
+        const fields = ['valor','iva','ipoconsumo_factura','valor_total','retenciones','descuentos','apoyo_comercial','margen_var',
+                        'valor_factoring','intereses_factoring',
+                        'valor_venta','iva_venta_display','ipoconsumo','retenciones_venta','descuentos_venta','valor_total_venta_display',
+                        'valor_utilidad','comision_gcia','comision','costo_financiero','valor_matricula','valor_soat','impuestos','otros',
+                        'valor_desembolso','saldo','comision_bancaria_vendedor','comision_bancaria_conseccionario'];
+        fields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && !el.readOnly) {
+                el.classList.add('currency');
+                el.addEventListener('blur', () => formatCurrencyInput(el));
+                el.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') formatCurrencyInput(el);
+                });
+            }
+        });
+    }
 
     // ── CALC ──
     function calcularValores() {
@@ -1681,13 +1716,10 @@
         const ipoconsumoFactura = parseFloat(document.getElementById('ipoconsumo_factura')?.value) || 0;
         const valorTotalCalc = valor + ivaCalculado + ipoconsumoFactura;
         document.getElementById('valor_total').value = valorTotalCalc.toFixed(2);
-
-        // Margen Var = valor_total - retenciones - descuentos - apoyo_comercial
-        const margenVar = valorTotalCalc - retenciones - descuentos - apoyo;
-        document.getElementById('margen_var_display').value = formatMoney(margenVar);
         
         // Valor Total Unidad = valor_total - retenciones - descuentos - apoyo_comercial - margen_var
-        const valorTotalUnidad = valorTotal - retenciones - descuentos - apoyo - margenVar;
+        const margenVar = parseFloat(document.getElementById('margen_var')?.value) || 0;
+        const valorTotalUnidad = valorTotalCalc - retenciones - descuentos - apoyo - margenVar;
         document.getElementById('costo_total_display').value = formatMoney(valorTotalUnidad);
 
         // Días Faltantes Factura = vencimiento_factura - fecha_factura
@@ -1822,7 +1854,7 @@
                 retenciones: parseFloat(g('retenciones').value) || 0,
                 descuentos: parseFloat(g('descuentos').value) || 0,
                 apoyo_comercial: parseFloat(g('apoyo_comercial').value) || 0,
-                margen_var: parseM(g('margen_var_display').value),
+                margen_var: parseFloat(g('margen_var').value) || 0,
                 no_nc: g('no_nc').value,
                 costo_total: 0,
                 // Recepción
@@ -2193,7 +2225,7 @@
                 // Facturación Inchcape
                 'fecha_factura','no_factura','vencimiento_factura','dias_faltantes_factura','cantidad','valor','iva',
                 'porcentaje_iva','ipoconsumo_factura','valor_total','retenciones','descuentos',
-                'apoyo_comercial','margen_var_display','no_nc','costo_total_display',
+                'apoyo_comercial','margen_var','no_nc','costo_total_display',
                 // Recepción
                 'fecha_llegada',
                 // Factoring
@@ -2612,6 +2644,7 @@
         const fechaInput = document.getElementById('fecha_solicitud');
         if (fechaInput) fechaInput.value = new Date().toISOString().split('T')[0];
         calcularValores();
+        formatCurrencyFields();
     });
 </script>
 </body>
