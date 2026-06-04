@@ -1141,6 +1141,10 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Número Factura Venta</label>
+                        <input type="text" id="numero_factura_venta" class="form-control" placeholder="Número de factura">
+                    </div>
+                    <div class="form-group">
                         <label>Fecha Factura (Venta)</label>
                         <input type="date" id="fecha_factura_venta" class="form-control">
                     </div>
@@ -1974,6 +1978,7 @@
                 sede: g('sede').value,
                 id_cliente: g('id_cliente').value,
                 cliente: g('cliente').value,
+                numero_factura_venta: g('numero_factura_venta').value,
                 fecha_factura_venta: g('fecha_factura_venta').value,
                 cantidad_venta: parseFloat(g('cantidad_venta').value) || 0,
                 valor_venta: parseFloat(g('valor_venta').value) || 0,
@@ -2346,7 +2351,7 @@
                 'factoring','estado','valor_factoring','intereses_factoring','valor_a_pagar_display','fecha_desembolso','vencimiento_factoring',
                 'dias_faltantes_display','dias_en_factoring','dias_libres_factoring','dias_con_costo','fecha_pago',
                 // Venta
-                'fecha_venta','sede','id_cliente','cliente','fecha_factura_venta','cantidad_venta',
+                'fecha_venta','sede','id_cliente','cliente','numero_factura_venta','fecha_factura_venta','cantidad_venta',
                 'valor_venta','porcentaje_iva_venta','iva_venta_display','ipoconsumo','porcentaje_ipoconsumo_venta',
                 'retenciones_venta','descuentos_venta','valor_total_venta_display',
                 'valor_utilidad','porcentaje_utilidad',
@@ -2413,7 +2418,7 @@
             'Valor Total','APOYO CCIAL','MARGEN VAR','No. NC','Costo Total','% Desc','Valor Desc',
             'Fecha Llegada','Factoring','Estado','Fecha Desembolso','Vencimiento Factoring',
             'Días Faltantes Factoring','Días en Factoring','Días Libres Factoring','Días Con Costo','Fecha Pago',
-            'Fecha Venta','Sede','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
+             'Fecha Venta','Sede','Id Cliente','Cliente','Número Factura Venta','Fecha Factura Venta','Cantidad Venta',
             '% IVA Venta','IVA Venta','% Ipoconsumo','Ipoconsumo','Retenciones Venta','Descuentos Venta',
             'Valor Total Venta','Valor Utilidad','% Utilidad',
             'Fecha Envío Transformación','Fecha Recepción Transformación','Comisión Gcia','Comisión',
@@ -2431,7 +2436,7 @@
             r.valor_total,r.apoyo_comercial,r.margen_var,r.no_nc,r.costo_total,r.porcentaje_desc,r.valor_desc,
             r.fecha_llegada,r.factoring,r.estado,r.fecha_desembolso,r.vencimiento_factoring,
             r.dias_faltantes,r.dias_en_factoring,r.dias_libres_factoring,r.dias_con_costo,r.fecha_pago,
-            r.fecha_venta,r.sede,r.id_cliente,r.cliente,r.fecha_factura_venta,r.cantidad_venta,
+            r.fecha_venta,r.sede,r.id_cliente,r.cliente,r.numero_factura_venta,r.fecha_factura_venta,r.cantidad_venta,
             r.porcentaje_iva_venta,r.iva_venta,r.porcentaje_ipoconsumo_venta,r.ipoconsumo,r.retenciones_venta,r.descuentos_venta,
             r.valor_total_venta,r.valor_utilidad,r.porcentaje_utilidad,
             r.fecha_envio_transformacion,r.fecha_recepcion_transformacion,r.comision_gcia,r.comision,
@@ -2674,7 +2679,7 @@
              'Fecha Llegada','Factoring','Estado','Valor Factoring','Intereses Factoring','Valor a Pagar',
              'Fecha Desembolso','Vencimiento Factoring','Dias Faltantes Factoring',
              'Dias en Factoring','Dias Libres Factoring','Dias Con Costo','Fecha Pago',
-             'Fecha Venta','Sede','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
+            'Fecha Venta','Sede','Id Cliente','Cliente','Número Factura Venta','Fecha Factura Venta','Cantidad Venta',
              'Valor Venta','Porcentaje IVA Venta','IVA Venta','Porcentaje Ipoconsumo','Ipoconsumo',
              'Retenciones Venta','Descuentos Venta','Valor Total Venta','Valor Utilidad',
              'Porcentaje Utilidad',
@@ -2692,7 +2697,7 @@
              '2024-03-15','Entidad Factoring','Activo','60000000','3000000','63000000',
              '','','30',
              '5','2','3','',
-             '2024-03-03','CCC','290093','CLIENTE EJEMPLO','2024-03-01','1',
+             '2024-03-03','CCC','290093','CLIENTE EJEMPLO','FACV-001','2024-03-01','1',
              '67990000','19','12918100','0','0','0','0','80908100','5142100','8.99',
              '','','0','285672','0','','','2024-01-01','500000','0','0','285672',
              '2024-04-01',
