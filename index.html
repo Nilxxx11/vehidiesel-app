@@ -1768,6 +1768,7 @@
     }
     
     function formatCurrencyInput(input) {
+        if (input.type === 'number') return;
         const val = parseMoney(input.value);
         if (val > 0) {
             input.value = formatMoney(val);
@@ -1925,7 +1926,7 @@
         try {
             showLoader();
             const g = id => document.getElementById(id);
-            const parseM = val => parseFloat((val || '').toString().replace(/[$,\s]/g, '')) || 0;
+            const parseM = val => parseFloat((val || '').toString().replace(/[$.,\s]/g, '')) || 0;
 
             const registro = {
                 // Solicitud
@@ -1965,7 +1966,7 @@
                 estado: g('estado').value,
                 valor_factoring: parseFloat(g('valor_factoring').value) || 0,
                 intereses_factoring: parseFloat(g('intereses_factoring').value) || 0,
-                valor_a_pagar: parseFloat(g('valor_factoring').value) || 0 + parseFloat(g('intereses_factoring').value) || 0,
+                valor_a_pagar: (parseFloat(g('valor_factoring').value) || 0) + (parseFloat(g('intereses_factoring').value) || 0),
                 fecha_desembolso: g('fecha_desembolso').value,
                 vencimiento_factoring: g('vencimiento_factoring').value,
                 dias_faltantes: parseInt(g('dias_faltantes_display').value) || 0,
@@ -2785,11 +2786,23 @@
         }
     });
 
+    function convertirAMayusculas() {
+        document.querySelectorAll('#tab-registros input[type="text"], #tab-registros input[type="tel"], #tab-registros input[type="email"], #tab-registros textarea').forEach(el => {
+            el.addEventListener('input', function() {
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                this.value = this.value.toUpperCase();
+                this.setSelectionRange(start, end);
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const fechaInput = document.getElementById('fecha_solicitud');
         if (fechaInput) fechaInput.value = new Date().toISOString().split('T')[0];
         calcularValores();
         formatCurrencyFields();
+        convertirAMayusculas();
     });
 </script>
 </body>
