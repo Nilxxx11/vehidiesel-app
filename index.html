@@ -914,10 +914,6 @@
                         <input type="date" id="fecha_solicitud" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Código</label>
-                        <input type="text" id="codigo" class="form-control" placeholder="Código único">
-                    </div>
-                    <div class="form-group">
                         <label>Marca</label>
                         <input type="text" id="marca" class="form-control" placeholder="Ej: SDC, HINO">
                     </div>
@@ -932,12 +928,12 @@
                         <label>Modelo</label>
                         <input type="number" id="anio_facturacion" class="form-control" value="2024">
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
                         <label>Descripción</label>
                         <input type="text" id="descripcion" class="form-control" required placeholder="Ej: VAN PASAJEROS K07S">
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label>Grupo</label>
                         <select id="grupo" class="form-control">
@@ -948,10 +944,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Subgrupo</label>
-                        <input type="text" id="subgrupo" class="form-control" placeholder="Ej: Vehículos">
-                    </div>
-                    <div class="form-group">
                         <label>VIN</label>
                         <input type="text" id="vin" class="form-control" placeholder="Número VIN">
                     </div>
@@ -959,23 +951,9 @@
                         <label>Bodega</label>
                         <input type="text" id="bodega" class="form-control" placeholder="Ej: Vehiculos SDC">
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
                         <label>Importador</label>
                         <input type="text" id="importador" class="form-control" placeholder="Nombre importador">
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo</label>
-                        <input type="text" id="tipo" class="form-control" placeholder="Ej: Factura SDC">
-                    </div>
-                    <div class="form-group">
-                        <label>Linea</label>
-                        <input type="text" id="linea" class="form-control" placeholder="Linea del vehículo">
-                    </div>
-                    <div class="form-group">
-                        <label>Color / Marca</label>
-                        <input type="text" id="color_marca" class="form-control" placeholder="Color del vehículo">
                     </div>
                 </div>
 
@@ -1026,14 +1004,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Precio</label>
-                        <input type="number" id="precio" class="form-control" value="0" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label>Precio + IVA</label>
-                        <input type="text" id="precio_iva_display" class="form-control currency" readonly>
-                    </div>
-                    <div class="form-group">
                         <label>Valor Total</label>
                         <input type="number" id="valor_total" class="form-control" value="0" step="0.01" readonly>
                     </div>
@@ -1073,10 +1043,6 @@
                         <label>Valor Total a Pagar</label>
                         <input type="text" id="costo_total_display" class="form-control currency" readonly>
                     </div>
-                    <div class="form-group">
-                        <label>% Utilidad</label>
-                        <input type="number" id="porcentaje_uti" class="form-control" value="0" step="0.01">
-                    </div>
                 </div>
 
                 <div class="section-title">📦 Recepción</div>
@@ -1107,8 +1073,8 @@
                         <input type="date" id="fecha_desembolso" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Vencimiento Leasing</label>
-                        <input type="date" id="vencimiento_leasing" class="form-control">
+                        <label>Vencimiento Factoring</label>
+                        <input type="date" id="vencimiento_factoring" class="form-control">
                     </div>
                 </div>
                 <div class="form-row">
@@ -1123,10 +1089,6 @@
                     <div class="form-group">
                         <label>Valor a Pagar</label>
                         <input type="text" id="valor_a_pagar_display" class="form-control currency" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Vencimiento Factoring</label>
-                        <input type="date" id="vencimiento_factoring" class="form-control">
                     </div>
                 </div>
                 <div class="form-row">
@@ -1179,10 +1141,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>N° Venta</label>
-                        <input type="text" id="numero" class="form-control" placeholder="Número de venta">
-                    </div>
-                    <div class="form-group">
                         <label>Fecha Factura (Venta)</label>
                         <input type="date" id="fecha_factura_venta" class="form-control">
                     </div>
@@ -1225,10 +1183,6 @@
                     <div class="form-group">
                         <label>Valor Total Venta</label>
                         <input type="text" id="valor_total_venta_display" class="form-control currency" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Precio Neto Venta</label>
-                        <input type="text" id="precio_neto_venta_display" class="form-control currency" readonly>
                     </div>
                     <div class="form-group">
                         <label>Valor Utilidad</label>
@@ -1819,12 +1773,12 @@
     }
     
     function formatCurrencyFields() {
-        const fields = ['valor','iva','ipoconsumo_factura','valor_total','precio','retenciones','descuentos','apoyo_comercial','margen_var',
+        const fields = ['valor','iva','ipoconsumo_factura','valor_total','retenciones','descuentos','apoyo_comercial','margen_var',
                         'valor_factoring','intereses_factoring',
                         'valor_venta','iva_venta_display','ipoconsumo','retenciones_venta','descuentos_venta','valor_total_venta_display',
                         'valor_utilidad','comision_gcia','comision','costo_financiero','valor_matricula','valor_soat','impuestos','otros',
                         'valor_desembolso','saldo','comision_bancaria_vendedor','comision_bancaria_conseccionario',
-                        'precio_iva_display','precio_neto_venta_display','costo_financiero_factoring','intereses_cargados_flujo_caja',
+                        'costo_financiero_factoring','intereses_cargados_flujo_caja',
                         'costo_financiero_real_factoring_vehiculo','delta_flujo_caja_factoring','costo_financiero_real_vehiculo',
                         'intereses_generados','utilidad_neta','rentabilidad','valor_pagado','valor_desc','porcentaje_desc'];
         fields.forEach(id => {
@@ -1858,11 +1812,6 @@
         const valorTotalCalc = valor + ivaCalculado + ipoconsumoFactura;
         document.getElementById('valor_total').value = valorTotalCalc.toFixed(2);
         
-        // Precio + IVA = Precio + (Precio * % IVA / 100) (Precio+Iva from xlsx)
-        const precio = parseFloat(document.getElementById('precio')?.value) || 0;
-        const precioIvaCalc = precio + (precio * iva / 100);
-        document.getElementById('precio_iva_display').value = formatMoney(precioIvaCalc);
-        
         // Valor Total Unidad = valor_total - retenciones - descuentos - apoyo_comercial - margen_var
         const margenVar = parseFloat(document.getElementById('margen_var')?.value) || 0;
         const valorTotalUnidad = valorTotalCalc - retenciones - descuentos - apoyo - margenVar;
@@ -1892,9 +1841,6 @@
         const descuentosVenta = parseFloat(document.getElementById('descuentos_venta')?.value) || 0;
         const valorTotalVenta = valorVenta + ivaVentaCalc + ipoconsumoVentaCalc - retencionesVenta - descuentosVenta;
         document.getElementById('valor_total_venta_display').value = formatMoney(valorTotalVenta);
-        
-        // Precio Neto Venta = Precio+Iva Venta - descuentos - retenciones (if different from valor_total_venta)
-        document.getElementById('precio_neto_venta_display').value = formatMoney(valorTotalVenta);
 
         // Valor a Pagar = Valor + Intereses (Factoring)
         const valorFactoring = parseFloat(document.getElementById('valor_factoring')?.value) || 0;
@@ -1931,7 +1877,7 @@
      'ipoconsumo_factura','iva','valor_factoring','intereses_factoring',
      'vencimiento_factoring','fecha_desembolso','valor_venta',
      'porcentaje_ipoconsumo_venta','retenciones_venta','descuentos_venta',
-     'valor_matricula','valor_soat','precio'].forEach(id => {
+     'valor_matricula','valor_soat'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', calcularValores);
@@ -1980,18 +1926,13 @@
             const registro = {
                 // Solicitud
                 fecha_solicitud: g('fecha_solicitud').value,
-                codigo: g('codigo').value,
                 grupo: g('grupo').value,
-                subgrupo: g('subgrupo').value,
                 marca: g('marca').value,
                 descripcion: g('descripcion').value,
                 vin: g('vin').value,
                 bodega: g('bodega').value,
                 importador: g('importador').value,
                 demo: g('demo').value,
-                tipo: g('tipo').value,
-                linea: g('linea').value,
-                color_marca: g('color_marca').value,
                 anio_facturacion: g('anio_facturacion').value,
                 // Facturación Inchcape
                 fecha_factura: g('fecha_factura').value,
@@ -2005,8 +1946,6 @@
                 porcentaje_iva3: parseFloat(g('porcentaje_iva3').value) || 0,
                 ipoconsumo_factura: parseFloat(g('ipoconsumo_factura').value) || 0,
                 valor_total: parseFloat(g('valor_total').value) || 0,
-                precio: parseFloat(g('precio').value) || 0,
-                precio_iva: parseM(g('precio_iva_display').value),
                 retenciones: parseFloat(g('retenciones').value) || 0,
                 descuentos: parseFloat(g('descuentos').value) || 0,
                 apoyo_comercial: parseFloat(g('apoyo_comercial').value) || 0,
@@ -2015,7 +1954,6 @@
                 costo_total: parseM(g('costo_total_display').value),
                 valor_desc: parseFloat(g('valor_desc').value) || 0,
                 porcentaje_desc: parseFloat(g('porcentaje_desc').value) || 0,
-                porcentaje_uti: parseFloat(g('porcentaje_uti').value) || 0,
                 // Recepción
                 fecha_llegada: g('fecha_llegada').value,
                 // Factoring
@@ -2026,7 +1964,6 @@
                 valor_a_pagar: parseFloat(g('valor_factoring').value) || 0 + parseFloat(g('intereses_factoring').value) || 0,
                 fecha_desembolso: g('fecha_desembolso').value,
                 vencimiento_factoring: g('vencimiento_factoring').value,
-                vencimiento_leasing: g('vencimiento_leasing').value,
                 dias_faltantes: parseInt(g('dias_faltantes_display').value) || 0,
                 dias_en_factoring: parseFloat(g('dias_en_factoring').value) || 0,
                 dias_libres_factoring: parseFloat(g('dias_libres_factoring').value) || 0,
@@ -2035,7 +1972,6 @@
                 // Venta
                 fecha_venta: g('fecha_venta').value,
                 sede: g('sede').value,
-                numero: g('numero').value,
                 id_cliente: g('id_cliente').value,
                 cliente: g('cliente').value,
                 fecha_factura_venta: g('fecha_factura_venta').value,
@@ -2048,7 +1984,6 @@
                 retenciones_venta: parseFloat(g('retenciones_venta').value) || 0,
                 descuentos_venta: parseFloat(g('descuentos_venta').value) || 0,
                 valor_total_venta: parseM(g('valor_total_venta_display').value),
-                precio_neto_venta: parseM(g('precio_neto_venta_display').value),
                 valor_utilidad: parseFloat(g('valor_utilidad').value) || 0,
                 porcentaje_utilidad: parseFloat(g('porcentaje_utilidad').value) || 0,
                 fecha_envio_transformacion: g('fecha_envio_transformacion').value,
@@ -2400,20 +2335,20 @@
         setTimeout(() => {
             const fields = [
                 // Solicitud
-                'fecha_solicitud','codigo','grupo','subgrupo','marca','descripcion','vin','bodega','importador','demo','tipo','linea','color_marca','anio_facturacion',
+                'fecha_solicitud','grupo','marca','descripcion','vin','bodega','importador','demo','anio_facturacion',
                 // Facturación Inchcape
                 'fecha_factura','no_factura','vencimiento_factura','dias_faltantes_factura','cantidad','valor','iva',
-                'porcentaje_iva','porcentaje_iva3','ipoconsumo_factura','valor_total','precio','retenciones','descuentos',
-                'apoyo_comercial','margen_var','no_nc','costo_total_display','precio_iva_display','valor_desc','porcentaje_desc','porcentaje_uti',
+                'porcentaje_iva','porcentaje_iva3','ipoconsumo_factura','valor_total','retenciones','descuentos',
+                'apoyo_comercial','margen_var','no_nc','costo_total_display','valor_desc','porcentaje_desc',
                 // Recepción
                 'fecha_llegada',
                 // Factoring
-                'factoring','estado','valor_factoring','intereses_factoring','valor_a_pagar_display','fecha_desembolso','vencimiento_factoring','vencimiento_leasing',
+                'factoring','estado','valor_factoring','intereses_factoring','valor_a_pagar_display','fecha_desembolso','vencimiento_factoring',
                 'dias_faltantes_display','dias_en_factoring','dias_libres_factoring','dias_con_costo','fecha_pago',
                 // Venta
-                'fecha_venta','sede','numero','id_cliente','cliente','fecha_factura_venta','cantidad_venta',
+                'fecha_venta','sede','id_cliente','cliente','fecha_factura_venta','cantidad_venta',
                 'valor_venta','porcentaje_iva_venta','iva_venta_display','ipoconsumo','porcentaje_ipoconsumo_venta',
-                'retenciones_venta','descuentos_venta','valor_total_venta_display','precio_neto_venta_display',
+                'retenciones_venta','descuentos_venta','valor_total_venta_display',
                 'valor_utilidad','porcentaje_utilidad',
                 // Acuerdos Comerciales
                 'fecha_envio_transformacion','fecha_recepcion_transformacion','comision_gcia','comision',
@@ -2473,14 +2408,14 @@
     exportarExcelBtn?.addEventListener('click', () => {
         if (!todosLosRegistros.length) { showNotification('No hay datos para exportar', 'error'); return; }
         // MODIFICACIÓN: se quitó Precio Neto, intereses_generados es calculado, matricula y soat son fechas
-        const cols = ['Fecha Solicitud','Código','Grupo','Subgrupo','Marca','Descripcion','VIN','Bodega','Importador','Demo','AÑO','Tipo','Linea','Color/Marca',
+        const cols = ['Fecha Solicitud','Grupo','Marca','Descripcion','VIN','Bodega','Importador','Demo','AÑO',
             'Fecha Factura','No Factura','Vencimiento Factura','Días Faltantes Factura','Cantidad','Valor','% IVA','% IVA 3','IVA','Impoconsumo',
-            'Valor Total','Precio','Precio+IVA','APOYO CCIAL','MARGEN VAR','No. NC','Costo Total','% Desc','Valor Desc',
-            'Fecha Llegada','Factoring','Estado','Fecha Desembolso','Vencimiento Factoring','Vencimiento Leasing',
+            'Valor Total','APOYO CCIAL','MARGEN VAR','No. NC','Costo Total','% Desc','Valor Desc',
+            'Fecha Llegada','Factoring','Estado','Fecha Desembolso','Vencimiento Factoring',
             'Días Faltantes Factoring','Días en Factoring','Días Libres Factoring','Días Con Costo','Fecha Pago',
-            'Fecha Venta','Sede','Número Venta','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
+            'Fecha Venta','Sede','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
             '% IVA Venta','IVA Venta','% Ipoconsumo','Ipoconsumo','Retenciones Venta','Descuentos Venta',
-            'Valor Total Venta','Precio Neto Venta','Valor Utilidad','% Utilidad',
+            'Valor Total Venta','Valor Utilidad','% Utilidad',
             'Fecha Envío Transformación','Fecha Recepción Transformación','Comisión Gcia','Comisión',
             'Costo Financiero','Fecha Matrícula','Matrícula','SOAT','Valor SOAT','Impuestos','Otros',
             'Total Gastos','Fecha Entrega Final',
@@ -2491,14 +2426,14 @@
             'Vendedor','Vendedor Operación','Alterna','Notas','Observaciones'];
         const rows = [cols];
         todosLosRegistros.forEach(r => rows.push([
-            r.fecha_solicitud,r.codigo,r.grupo,r.subgrupo,r.marca,r.descripcion,r.vin,r.bodega,r.importador,r.demo,r.anio_facturacion,r.tipo,r.linea,r.color_marca,
+            r.fecha_solicitud,r.grupo,r.marca,r.descripcion,r.vin,r.bodega,r.importador,r.demo,r.anio_facturacion,
             r.fecha_factura,r.no_factura,r.vencimiento_factura,r.dias_faltantes_factura,r.cantidad,r.valor,r.porcentaje_iva,r.porcentaje_iva3,r.iva,r.ipoconsumo_factura,
-            r.valor_total,r.precio,r.precio_iva,r.apoyo_comercial,r.margen_var,r.no_nc,r.costo_total,r.porcentaje_desc,r.valor_desc,
-            r.fecha_llegada,r.factoring,r.estado,r.fecha_desembolso,r.vencimiento_factoring,r.vencimiento_leasing,
+            r.valor_total,r.apoyo_comercial,r.margen_var,r.no_nc,r.costo_total,r.porcentaje_desc,r.valor_desc,
+            r.fecha_llegada,r.factoring,r.estado,r.fecha_desembolso,r.vencimiento_factoring,
             r.dias_faltantes,r.dias_en_factoring,r.dias_libres_factoring,r.dias_con_costo,r.fecha_pago,
-            r.fecha_venta,r.sede,r.numero,r.id_cliente,r.cliente,r.fecha_factura_venta,r.cantidad_venta,
+            r.fecha_venta,r.sede,r.id_cliente,r.cliente,r.fecha_factura_venta,r.cantidad_venta,
             r.porcentaje_iva_venta,r.iva_venta,r.porcentaje_ipoconsumo_venta,r.ipoconsumo,r.retenciones_venta,r.descuentos_venta,
-            r.valor_total_venta,r.precio_neto_venta,r.valor_utilidad,r.porcentaje_utilidad,
+            r.valor_total_venta,r.valor_utilidad,r.porcentaje_utilidad,
             r.fecha_envio_transformacion,r.fecha_recepcion_transformacion,r.comision_gcia,r.comision,
             r.costo_financiero,r.fecha_matricula,r.matricula,r.soat,r.valor_soat,r.impuestos,r.otros,
             r.total_gastos,r.fecha_entrega_final,
@@ -2732,16 +2667,16 @@
     // ── TEMPLATE DOWNLOAD ──
     descargarTemplate?.addEventListener('click', () => {
         const data = [
-            ['Fecha Solicitud','Código','Grupo','Subgrupo','Marca','Descripcion','VIN','Bodega','Importador','Demo','Anio Facturacion','Tipo','Linea','Color/Marca',
+            ['Fecha Solicitud','Grupo','Marca','Descripcion','VIN','Bodega','Importador','Demo','Anio Facturacion',
              'Fecha Factura','No Factura','Vencimiento Factura','Dias Faltantes Factura','Cantidad','Valor',
-             'Porcentaje IVA','Porcentaje IVA 3','IVA','Impoconsumo Factura','Valor Total','Precio','Precio+IVA',
-             'Retenciones','Descuentos','Apoyo Comercial','Margen Var','No NC','Costo Total','% Desc','Valor Desc','% Uti',
+             'Porcentaje IVA','Porcentaje IVA 3','IVA','Impoconsumo Factura','Valor Total',
+             'Retenciones','Descuentos','Apoyo Comercial','Margen Var','No NC','Costo Total','% Desc','Valor Desc',
              'Fecha Llegada','Factoring','Estado','Valor Factoring','Intereses Factoring','Valor a Pagar',
-             'Fecha Desembolso','Vencimiento Factoring','Vencimiento Leasing','Dias Faltantes Factoring',
+             'Fecha Desembolso','Vencimiento Factoring','Dias Faltantes Factoring',
              'Dias en Factoring','Dias Libres Factoring','Dias Con Costo','Fecha Pago',
-             'Fecha Venta','Sede','Numero','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
+             'Fecha Venta','Sede','Id Cliente','Cliente','Fecha Factura Venta','Cantidad Venta',
              'Valor Venta','Porcentaje IVA Venta','IVA Venta','Porcentaje Ipoconsumo','Ipoconsumo',
-             'Retenciones Venta','Descuentos Venta','Valor Total Venta','Precio Neto Venta','Valor Utilidad',
+             'Retenciones Venta','Descuentos Venta','Valor Total Venta','Valor Utilidad',
              'Porcentaje Utilidad',
              'Fecha Envio Transformacion','Fecha Recepcion Transformacion','Comision Gcia','Comision',
              'Costo Financiero','Fecha Matricula','Matricula','Valor Matricula','SOAT','Valor SOAT','Impuestos','Otros','Total Gastos',
@@ -2751,14 +2686,14 @@
              'Costo Fin. Real Factoring Veh.','Delta Flujo Caja Factoring','Costo Fin. Real Vehiculo','Intereses Generados',
              'Comision Bancaria Vendedor','Comision Bancaria Conseccionario','Utilidad Neta','Rentabilidad',
              'Vendedor','Vendedor Operacion','Alterna','Notas','Observaciones'],
-            ['2024-03-03','COD-001','Vehículos Livianos','Vehículos','SDC','VAN PASAJEROS K07S','VIN123','Vehiculos SDC','Importador Ejemplo','No','2024','Factura SDC','Linea Ejemplo','Rojo',
-             '2024-03-01','FAC-001','2024-04-01','30','1','50000000','19','0','9500000','0','59500000','67990000','67990000',
-             '0','0','0','1142689','PDNC-10016198','51992353','0','0','8.99',
+            ['2024-03-03','Vehículos Livianos','SDC','VAN PASAJEROS K07S','VIN123','Vehiculos SDC','Importador Ejemplo','No','2024',
+             '2024-03-01','FAC-001','2024-04-01','30','1','50000000','19','0','9500000','0','59500000',
+             '0','0','0','1142689','PDNC-10016198','51992353','0','0',
              '2024-03-15','Entidad Factoring','Activo','60000000','3000000','63000000',
-             '','','','30',
+             '','','30',
              '5','2','3','',
-             '2024-03-03','CCC','1','290093','CLIENTE EJEMPLO','2024-03-01','1',
-             '67990000','19','12918100','0','0','0','0','80908100','80908100','5142100','8.99',
+             '2024-03-03','CCC','290093','CLIENTE EJEMPLO','2024-03-01','1',
+             '67990000','19','12918100','0','0','0','0','80908100','5142100','8.99',
              '','','0','285672','0','','','2024-01-01','500000','0','0','285672',
              '2024-04-01',
              'Banco Ejemplo','2024-03-10','67990000','67990000','0',
