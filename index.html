@@ -1091,11 +1091,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Valor</label>
-                        <input type="text" id="valor_factoring" class="form-control currency" value="0">
+                        <input type="text" id="valor_factoring" class="form-control currency" readonly title="Valor (Importador)">
                     </div>
                     <div class="form-group">
                         <label>Valor a Pagar</label>
-                        <input type="text" id="valor_a_pagar_display" class="form-control currency" readonly title="Valor Factoring + Intereses">
+                        <input type="text" id="valor_a_pagar_display" class="form-control currency" title="Valor que el banco paga">
                     </div>
                     <div class="form-group">
                         <label>Intereses (Calculado)</label>
@@ -1806,8 +1806,8 @@
     
     function formatCurrencyFields() {
         const fields = ['valor','ipoconsumo_factura','retenciones','descuentos','apoyo_comercial','margen_var',
-                         'valor_factoring',
                         'valor_venta','retenciones_venta','descuentos_venta',
+                        'valor_a_pagar_display',
                         'comision_gcia','costo_financiero','valor_matricula','valor_soat','impuestos','otros',
                         'valor_desembolso','comision_bancaria_vendedor','comision_bancaria_concesionario',
                         'intereses_cargados_flujo_caja',
@@ -1876,12 +1876,14 @@
         document.getElementById('porcentaje_utilidad').value = pctUtilidad.toFixed(2);
 
         // ── Factoring ──
-        const valorFactoring = parseMoney(document.getElementById('valor_factoring')?.value);
-        const interesesFactoring = 0;
-        document.getElementById('valor_a_pagar_display').value = formatMoney(valorFactoring + interesesFactoring);
+        document.getElementById('valor_factoring').value = formatMoney(valor);
+        const valorFactoring = valor;
+        const valorAPagar = parseMoney(document.getElementById('valor_a_pagar_display')?.value);
+
+        const interesesFactoring = valorAPagar - valorFactoring;
 
         // Intereses (Calculado) = Valor a Pagar - Valor Factoring
-        document.getElementById('intereses_calculado_display').value = formatMoney(valorFactoring + interesesFactoring - valorFactoring);
+        document.getElementById('intereses_calculado_display').value = formatMoney(interesesFactoring);
 
         // Costo Financiero Factoring = Intereses Factoring
         document.getElementById('costo_financiero_factoring').value = formatMoney(interesesFactoring);
@@ -1966,7 +1968,8 @@
     ['cantidad','porcentaje_iva','apoyo_comercial','margen_var',
      'porcentaje_iva_venta','comision_gcia','impuestos','otros',
      'retenciones','descuentos','fecha_factura','vencimiento_factura','valor',
-     'ipoconsumo_factura','valor_factoring',
+     'ipoconsumo_factura',
+     'valor_a_pagar_display',
      'vencimiento_factoring','fecha_desembolso','fecha_pago','valor_venta',
      'porcentaje_ipoconsumo_venta','retenciones_venta','descuentos_venta',
      'valor_matricula','valor_soat','dias_libres_factoring','fecha_matricula','valor_desembolso'].forEach(id => {
@@ -2052,7 +2055,7 @@
                 factoring: g('factoring').value,
                 estado: g('estado').value,
                 valor_factoring: parseM(g('valor_factoring').value),
-                valor_a_pagar: parseM(g('valor_factoring').value),
+                valor_a_pagar: parseM(g('valor_a_pagar_display').value),
                 fecha_desembolso: g('fecha_desembolso').value,
                 vencimiento_factoring: g('vencimiento_factoring').value,
                 dias_faltantes: parseInt(g('dias_faltantes_display').value) || 0,
