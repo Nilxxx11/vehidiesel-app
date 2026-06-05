@@ -954,7 +954,13 @@
                     </div>
                     <div class="form-group">
                         <label>Bodega</label>
-                        <input type="text" id="bodega" class="form-control" placeholder="Ej: Vehiculos SDC">
+                        <select id="bodega" class="form-control">
+                            <option value="">Seleccionar bodega</option>
+                            <option value="CCC">CCC</option>
+                            <option value="CCG">CCG</option>
+                            <option value="Vehimotors Cartagena">Vehimotors Cartagena</option>
+                            <option value="Vehimotors Bucaramanga">Vehimotors Bucaramanga</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Importador</label>
@@ -1646,6 +1652,14 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Filtrar por VIN</label>
+                        <input type="text" id="filtro-vin-admin" class="form-control" placeholder="VIN del vehículo">
+                    </div>
+                    <div class="form-group">
+                        <label>Filtrar por No. Factura</label>
+                        <input type="text" id="filtro-factura-admin" class="form-control" placeholder="No. Factura importador">
+                    </div>
+                    <div class="form-group">
                         <label>Filtrar por usuario</label>
                         <input type="text" id="filtro-usuario" class="form-control" placeholder="Email del creador">
                     </div>
@@ -2211,11 +2225,15 @@
         const fe = document.getElementById('filtro-estado-admin')?.value || '';
         const fu = document.getElementById('filtro-usuario')?.value?.toLowerCase() || '';
         const fs = document.getElementById('filtro-sede-admin')?.value || '';
+        const fv = document.getElementById('filtro-vin-admin')?.value?.toLowerCase() || '';
+        const ff = document.getElementById('filtro-factura-admin')?.value?.toLowerCase() || '';
         const filtered = todosLosRegistros.filter(r => {
             if (fc && !r.cliente?.toLowerCase().includes(fc)) return false;
             if (fe && r.estado !== fe) return false;
             if (fu && !r.creado_por_email?.toLowerCase().includes(fu)) return false;
             if (fs && r.sede !== fs) return false;
+            if (fv && !r.vin?.toLowerCase().includes(fv)) return false;
+            if (ff && !r.no_factura?.toLowerCase().includes(ff)) return false;
             return true;
         });
         renderizarTablaAdmin(filtered);
@@ -2489,9 +2507,11 @@
     document.getElementById('filtro-cliente-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-estado-admin')?.addEventListener('change', aplicarFiltrosAdmin);
     document.getElementById('filtro-sede-admin')?.addEventListener('change', aplicarFiltrosAdmin);
+    document.getElementById('filtro-vin-admin')?.addEventListener('input', aplicarFiltrosAdmin);
+    document.getElementById('filtro-factura-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-usuario')?.addEventListener('input', aplicarFiltrosAdmin);
     limpiarFiltrosAdmin?.addEventListener('click', () => {
-        ['filtro-cliente-admin','filtro-estado-admin','filtro-sede-admin','filtro-usuario'].forEach(id => document.getElementById(id).value = '');
+        ['filtro-cliente-admin','filtro-estado-admin','filtro-sede-admin','filtro-vin-admin','filtro-factura-admin','filtro-usuario'].forEach(id => document.getElementById(id).value = '');
         aplicarFiltrosAdmin();
     });
     recargarBtn?.addEventListener('click', cargarTodosLosRegistros);
