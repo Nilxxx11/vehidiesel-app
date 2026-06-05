@@ -1458,6 +1458,7 @@
                 <div class="dashboard-header-actions">
                     <button id="recargar-btn" class="btn btn-ghost btn-sm">↻ Actualizar</button>
                     <button id="exportar-excel-btn" class="btn btn-success btn-sm">↓ Exportar Excel</button>
+                    <button id="exportar-informe-btn" class="btn btn-ghost btn-sm">↓ Exportar Informe</button>
                 </div>
             </div>
 
@@ -1607,7 +1608,7 @@
                         <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
                             <h5 style="font-size:12px; color:var(--text2); margin-bottom:10px;">⚠️ Acciones peligrosas</h5>
                             <div class="action-row">
-                                <button id="eliminar-todos-btn" class="btn btn-danger btn-sm" onclick="confirmarEliminarTodos()">🗑️ Eliminar todos los registros</button>
+                                <button id="eliminar-todos-btn" class="btn btn-danger btn-sm" disabled style="opacity:0.4;cursor:not-allowed;">🗑️ Eliminar todos los registros</button>
                                 <button id="exportar-json-btn" class="btn btn-ghost btn-sm" onclick="exportarJSON()">📥 Exportar como JSON</button>
                             </div>
                         </div>
@@ -2544,6 +2545,46 @@
         showNotification('Excel exportado correctamente');
     });
 
+    // ── EXPORT INFORME ──
+    document.getElementById('exportar-informe-btn')?.addEventListener('click', () => {
+        if (!todosLosRegistros.length) { showNotification('No hay datos para exportar', 'error'); return; }
+        const cols = ['Fecha Solicitud','Cliente','Descripción','Marca','VIN','Sede','Valor Venta','Margen','% Utilidad','Estado','Vendedor',
+            'Factoring','Fecha Desembolso','Vencimiento Factoring','Días Faltantes','Saldo',
+            'Costo Total','Valor Factura','Fecha Factura','Comisión','Total Gastos','Utilidad Neta'];
+        const rows = [[],['INFORME VEHIDIESEL'],['Generado: ' + new Date().toLocaleString('es-CO')],[],[]];
+        rows.push(cols);
+        todosLosRegistros.forEach(r => rows.push([
+            r.fecha_solicitud ? new Date(r.fecha_solicitud).toLocaleDateString('es-CO') : '',
+            r.cliente || '',
+            r.descripcion || '',
+            r.marca || '',
+            r.vin || '',
+            r.sede || '',
+            r.valor_total_venta || 0,
+            r.margen_var || 0,
+            r.porcentaje_utilidad ? r.porcentaje_utilidad.toFixed(1) + '%' : '',
+            r.estado || '',
+            r.vendedor || '',
+            r.factoring || '',
+            r.fecha_desembolso || '',
+            r.vencimiento_factoring || '',
+            r.dias_faltantes || 0,
+            r.saldo || 0,
+            r.costo_total || 0,
+            r.valor_total || 0,
+            r.fecha_factura || '',
+            r.comision || 0,
+            r.total_gastos || 0,
+            r.utilidad_neta || 0
+        ].map(v => v ?? '')));
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(rows);
+        ws['!cols'] = cols.map(() => ({ wch: 18 }));
+        XLSX.utils.book_append_sheet(wb, ws, 'INFORME');
+        XLSX.writeFile(wb, `informe_vehidiesel_${new Date().toISOString().split('T')[0]}.xlsx`);
+        showNotification('Informe exportado correctamente');
+    });
+
     // ── IMPORT EXCEL / JSON ──
     let datosImportacion = [];
     
@@ -2779,7 +2820,7 @@
              'Entidad Financiacion','Fecha Desembolso Pago','Valor Desembolso','Valor Pagado','Saldo',
              'Costo Financiero Factoring','Dias Factoring','Dias Flujo Caja','Intereses Cargados Flujo Caja',
              'Costo Fin. Real Factoring Veh.','Delta Flujo Caja Factoring','Costo Fin. Real Vehiculo','Intereses Generados',
-             'Comision Bancaria Vendedor','Comision Bancaria Conseccionario','Utilidad Neta','Rentabilidad',
+             'Comision Bancaria Vendedor','Comision Bancaria Concesionario','Utilidad Neta','Rentabilidad',
              'Vendedor','Vendedor Operacion','Alterna','Notas','Observaciones'],
             ['2024-03-03','Vehículos Livianos','SDC','VAN PASAJEROS K07S','VIN123','Vehiculos SDC','Importador Ejemplo','No','2024',
              '2024-03-01','FAC-001','2024-04-01','30','1','50000000','19','0','9500000','0','59500000',
