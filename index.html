@@ -984,7 +984,7 @@
                     </div>
                     <div class="form-group">
                         <label>Días Faltantes Factura</label>
-                        <input type="number" id="dias_faltantes_factura" class="form-control" value="0" readonly>
+                        <input type="number" id="dias_faltantes_factura" class="form-control" value="0" readonly title="Vencimiento Factura − Fecha Factura">
                     </div>
                     <div class="form-group">
                         <label>Cantidad</label>
@@ -1002,7 +1002,7 @@
                     </div>
                     <div class="form-group">
                         <label>IVA</label>
-                        <input type="text" id="iva" class="form-control currency" value="0" readonly>
+                        <input type="text" id="iva" class="form-control currency" value="0" readonly title="Valor × (% IVA ÷ 100)">
                     </div>
                     <div class="form-group">
                         <label>% IVA 3</label>
@@ -1016,7 +1016,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Valor Total</label>
-                        <input type="number" id="valor_total" class="form-control" value="0" step="0.01" readonly>
+                        <input type="number" id="valor_total" class="form-control" value="0" step="0.01" readonly title="Valor + IVA + Ipoconsumo">
                     </div>
                     <div class="form-group">
                         <label>% Desc</label>
@@ -1052,7 +1052,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Valor Total a Pagar</label>
-                        <input type="text" id="costo_total_display" class="form-control currency" readonly>
+                        <input type="text" id="costo_total_display" class="form-control currency" readonly title="Valor Total − Retenciones − Descuentos − Apoyo − Margen Var">
                     </div>
                 </div>
 
@@ -1095,21 +1095,21 @@
                     </div>
                     <div class="form-group">
                         <label>Valor a Pagar</label>
-                        <input type="text" id="valor_a_pagar_display" class="form-control currency" readonly>
+                        <input type="text" id="valor_a_pagar_display" class="form-control currency" readonly title="Valor Factoring + Intereses">
                     </div>
                     <div class="form-group">
                         <label>Intereses (Calculado)</label>
-                        <input type="text" id="intereses_calculado_display" class="form-control currency" readonly>
+                        <input type="text" id="intereses_calculado_display" class="form-control currency" readonly title="Valor a Pagar − Valor Factoring">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Días Faltantes</label>
-                        <input type="number" id="dias_faltantes_display" class="form-control" readonly>
+                        <input type="number" id="dias_faltantes_display" class="form-control" readonly title="Vencimiento Factoring − Fecha Desembolso">
                     </div>
                     <div class="form-group">
                         <label>Días en Factoring</label>
-                        <input type="text" id="dias_en_factoring" class="form-control" readonly>
+                        <input type="text" id="dias_en_factoring" class="form-control" readonly title="Fecha Pago − Fecha Desembolso">
                     </div>
                     <div class="form-group">
                         <label>Días Libres Factoring</label>
@@ -1117,7 +1117,7 @@
                     </div>
                     <div class="form-group">
                         <label>Días Con Costo</label>
-                        <input type="text" id="dias_con_costo" class="form-control" readonly>
+                        <input type="text" id="dias_con_costo" class="form-control" readonly title="Días en Factoring − Días Libres Factoring">
                     </div>
                     <div class="form-group">
                         <label>Fecha de Pago</label>
@@ -1175,7 +1175,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>IVA</label>
-                        <input type="text" id="iva_venta_display" class="form-control currency" readonly>
+                        <input type="text" id="iva_venta_display" class="form-control currency" readonly title="Valor Venta × (% IVA Venta ÷ 100)">
                     </div>
                     <div class="form-group">
                         <label>% Impoconsumo</label>
@@ -1183,7 +1183,7 @@
                     </div>
                     <div class="form-group">
                         <label>Impoconsumo</label>
-                        <input type="number" id="ipoconsumo" class="form-control" value="0" step="0.01" readonly>
+                        <input type="number" id="ipoconsumo" class="form-control" value="0" step="0.01" readonly title="Valor Venta × (% Ipoconsumo ÷ 100)">
                     </div>
                     <div class="form-group">
                         <label>Retenciones</label>
@@ -1197,15 +1197,15 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Valor Total Venta</label>
-                        <input type="text" id="valor_total_venta_display" class="form-control currency" readonly>
+                        <input type="text" id="valor_total_venta_display" class="form-control currency" readonly title="Valor Venta + IVA + Ipoconsumo − Retenciones − Descuentos">
                     </div>
                     <div class="form-group">
                         <label>Valor Utilidad</label>
-                        <input type="text" id="valor_utilidad" class="form-control currency" readonly>
+                        <input type="text" id="valor_utilidad" class="form-control currency" readonly title="Valor Venta − Valor (Importador)">
                     </div>
                     <div class="form-group">
                         <label>% Utilidad</label>
-                        <input type="text" id="porcentaje_utilidad" class="form-control" readonly>
+                        <input type="text" id="porcentaje_utilidad" class="form-control" readonly title="(Valor Utilidad ÷ Valor) × 100">
                     </div>
                 </div>
 
@@ -1225,7 +1225,7 @@
                     </div>
                     <div class="form-group">
                         <label>Comisión</label>
-                        <input type="text" id="comision" class="form-control currency" readonly>
+                        <input type="text" id="comision" class="form-control currency" readonly title="Valor Venta × (% Comisión ÷ 100)">
                     </div>
                     <div class="form-group">
                         <label>Costo Financiero</label>
@@ -1265,7 +1265,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Total Gastos (calc.)</label>
-                        <input type="text" id="total_gastos" class="form-control currency" readonly>
+                        <input type="text" id="total_gastos" class="form-control currency" readonly title="Comisión Gcia + Comisión + Matrícula + SOAT + Impuestos + Otros">
                     </div>
                     <div class="form-group">
                         <label>Fecha Entrega Final</label>
@@ -1293,13 +1293,13 @@
                     </div>
                     <div class="form-group">
                         <label>Saldo</label>
-                        <input type="text" id="saldo" class="form-control currency" readonly>
+                        <input type="text" id="saldo" class="form-control currency" readonly title="Valor Total Venta − Valor Desembolso/Pago">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Costo Financiero Factoring</label>
-                        <input type="text" id="costo_financiero_factoring" class="form-control currency" readonly>
+                        <input type="text" id="costo_financiero_factoring" class="form-control currency" readonly title="Intereses (secciÃ³n Factoring)">
                     </div>
                     <div class="form-group">
                         <label>Días Factoring</label>
@@ -1307,7 +1307,7 @@
                     </div>
                     <div class="form-group">
                         <label>Días Flujo de Caja</label>
-                        <input type="number" id="dias_flujo_caja" class="form-control" value="0" readonly>
+                        <input type="number" id="dias_flujo_caja" class="form-control" value="0" readonly title="Fecha Matrícula − Fecha Factura">
                     </div>
                     <div class="form-group">
                         <label>Intereses Cargados Flujo Caja</label>
@@ -1317,15 +1317,15 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Costo Fin. Real Factoring Veh.</label>
-                        <input type="text" id="costo_financiero_real_factoring_vehiculo" class="form-control currency" readonly>
+                        <input type="text" id="costo_financiero_real_factoring_vehiculo" class="form-control currency" readonly title="(Costo Fin. Factoring ÷ Días Con Costo) × (Días Flujo Caja − Días Libres)">
                     </div>
                     <div class="form-group">
                         <label>Delta Flujo Caja Factoring</label>
-                        <input type="text" id="delta_flujo_caja_factoring" class="form-control currency" readonly>
+                        <input type="text" id="delta_flujo_caja_factoring" class="form-control currency" readonly title="Costo Fin. Factoring − Costo Fin. Real Factoring Veh.">
                     </div>
                     <div class="form-group">
                         <label>Costo Financiero Real Vehículo</label>
-                        <input type="text" id="costo_financiero_real_vehiculo" class="form-control currency" readonly>
+                        <input type="text" id="costo_financiero_real_vehiculo" class="form-control currency" readonly title="Tasa Diaria × Días Flujo Caja">
                     </div>
                     <div class="form-group">
                         <label>Intereses Generados</label>
