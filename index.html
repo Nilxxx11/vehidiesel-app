@@ -2195,10 +2195,7 @@
             if (snap.exists()) {
                 const data = snap.val();
                 todosLosRegistros = Object.entries(data).map(([id, v]) => ({ id, ...v }));
-                misRegistros = todosLosRegistros.filter(r => {
-                    if (currentUserSedes.length) return currentUserSedes.includes(r.sede);
-                    return r.creado_por === currentUser?.uid || r.creado_por_email === currentUser?.email;
-                });
+                misRegistros = todosLosRegistros.filter(r => r.creado_por === currentUser?.uid || r.creado_por_email === currentUser?.email);
                 misRegistros.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
             } else { todosLosRegistros = []; misRegistros = []; }
             renderizarMisRegistros();
