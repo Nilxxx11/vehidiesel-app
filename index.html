@@ -1010,7 +1010,7 @@
                     </div>
                     <div class="form-group">
                         <label>Impoconsumo</label>
-                        <input type="text" id="ipoconsumo_factura" class="form-control currency" value="0">
+                        <input type="text" id="ipoconsumo_factura" class="form-control currency" value="0" readonly title="Valor × (% IVA 3 ÷ 100)">
                     </div>
                 </div>
                 <div class="form-row">
@@ -1327,10 +1327,6 @@
                         <label>Costo Financiero Real Vehículo</label>
                         <input type="text" id="costo_financiero_real_vehiculo" class="form-control currency" readonly title="Tasa Diaria × Días Flujo Caja">
                     </div>
-                    <div class="form-group">
-                        <label>Intereses Generados</label>
-                        <input type="text" id="intereses_generados" class="form-control currency" value="0">
-                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -1500,6 +1496,12 @@
                     <div class="kpi-value" id="total-registros">0</div>
                     <div class="kpi-sub">en base de datos</div>
                 </div>
+                <div class="kpi-card-lg c-red">
+                    <span class="kpi-icon">⚠️</span>
+                    <div class="kpi-label">Leasing Vencido</div>
+                    <div class="kpi-value" id="total-leasing-vencido">0</div>
+                    <div class="kpi-sub">requieren atención</div>
+                </div>
                 <div class="kpi-card-lg c-green">
                     <span class="kpi-icon">📈</span>
                     <div class="kpi-label">Margen Total</div>
@@ -1517,18 +1519,6 @@
                     <div class="kpi-label">Promedio Margen</div>
                     <div class="kpi-value" id="promedio-margen">$0</div>
                     <div class="kpi-sub">por registro</div>
-                </div>
-                <div class="kpi-card-lg c-amber">
-                    <span class="kpi-icon">🏷️</span>
-                    <div class="kpi-label">Intereses Totales</div>
-                    <div class="kpi-value" id="total-intereses">$0</div>
-                    <div class="kpi-sub">generados</div>
-                </div>
-                <div class="kpi-card-lg c-red">
-                    <span class="kpi-icon">⚠️</span>
-                    <div class="kpi-label">Leasing Vencido</div>
-                    <div class="kpi-value" id="total-leasing-vencido">0</div>
-                    <div class="kpi-sub">requieren atención</div>
                 </div>
             </div>
 
@@ -1622,6 +1612,62 @@
                 </div>
             </div>
 
+            <!-- USER MANAGEMENT -->
+            <div style="margin-bottom:20px;">
+                <div class="import-toggle" id="user-toggle" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+                    <span>👥 Gestión de Usuarios</span>
+                    <i class="chevron">▼</i>
+                </div>
+                <div class="import-body" id="user-body">
+                    <div class="import-section">
+                        <h4>Crear Usuario</h4>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="new-user-email" class="form-control" placeholder="usuario@ejemplo.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña</label>
+                                <input type="password" id="user-password" class="form-control" placeholder="Mín. 6 caracteres">
+                            </div>
+                            <div class="form-group">
+                                <label>Rol</label>
+                                <select id="user-rol" class="form-control">
+                                    <option value="usuario">Usuario</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:12px;">
+                            <label style="display:block;margin-bottom:6px;font-size:12px;color:var(--text2);">Sedes a las que tiene acceso</label>
+                            <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="CCC"> CCC</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="CCG"> CCG</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="Vehimotors Cartagena"> Vehimotors Cartagena</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="Vehimotors Bucaramanga"> Vehimotors Bucaramanga</label>
+                            </div>
+                        </div>
+                        <div class="action-row">
+                            <button id="crear-usuario-btn" class="btn btn-success btn-sm">Crear Usuario</button>
+                            <span id="user-msg" style="font-size:12px;"></span>
+                        </div>
+                    </div>
+                    <div class="import-section" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+                        <h4>Usuarios Existentes</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr><th>Email</th><th>Rol</th><th>Sedes</th><th>Fecha Registro</th><th>Acciones</th></tr>
+                                </thead>
+                                <tbody id="tabla-usuarios">
+                                    <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3);">Cargando usuarios...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- FILTERS + TABLE -->
             <div class="card">
                 <div class="card-title">Todos los Registros</div>
@@ -1645,10 +1691,6 @@
                         <label>Filtrar por sede</label>
                         <select id="filtro-sede-admin" class="form-control">
                             <option value="">Todas</option>
-                            <option value="CCC">CCC</option>
-                            <option value="CCG">CCG</option>
-                            <option value="Vehimotors Cartagena">Vehimotors Cartagena</option>
-                            <option value="Vehimotors Bucaramanga">Vehimotors Bucaramanga</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1767,7 +1809,7 @@
     const importResult = document.getElementById('import-result');
     const importError = document.getElementById('import-error');
 
-    let currentUser = null, currentUserRole = null;
+    let currentUser = null, currentUserRole = null, currentUserSedes = [];
     let todosLosRegistros = [], misRegistros = [];
     let registroEnEdicion = null;
     let misPagina = 1;
@@ -1805,13 +1847,13 @@
     }
     
     function formatCurrencyFields() {
-        const fields = ['valor','ipoconsumo_factura','retenciones','descuentos','apoyo_comercial','margen_var',
+        const fields = ['valor','retenciones','descuentos','apoyo_comercial','margen_var',
                         'valor_venta','retenciones_venta','descuentos_venta',
                         'valor_a_pagar_display',
                         'comision_gcia','costo_financiero','valor_matricula','valor_soat','impuestos','otros',
                         'valor_desembolso','comision_bancaria_vendedor','comision_bancaria_concesionario',
                         'intereses_cargados_flujo_caja',
-                        'intereses_generados','utilidad_neta','rentabilidad','valor_pagado','valor_desc','porcentaje_desc'];
+                        'utilidad_neta','rentabilidad','valor_pagado','valor_desc','porcentaje_desc'];
         fields.forEach(id => {
             const el = document.getElementById(id);
             if (el && !el.readOnly) {
@@ -1834,7 +1876,9 @@
         const retenciones = parseMoney(document.getElementById('retenciones')?.value);
         const descuentos = parseMoney(document.getElementById('descuentos')?.value);
         const margenVar = parseMoney(document.getElementById('margen_var')?.value);
-        const ipoconsumoFactura = parseMoney(document.getElementById('ipoconsumo_factura')?.value);
+        const pctIva3 = parseFloat(document.getElementById('porcentaje_iva3')?.value) || 0;
+        const ipoconsumoFactura = valor * (pctIva3 / 100);
+        document.getElementById('ipoconsumo_factura').value = formatMoney(ipoconsumoFactura);
         
         const ivaCalculado = valor * (pctIva / 100);
         document.getElementById('iva').value = formatMoney(ivaCalculado);
@@ -1968,7 +2012,7 @@
     ['cantidad','porcentaje_iva','apoyo_comercial','margen_var',
      'porcentaje_iva_venta','comision_gcia','impuestos','otros',
      'retenciones','descuentos','fecha_factura','vencimiento_factura','valor',
-     'ipoconsumo_factura',
+     'porcentaje_iva3',
      'valor_a_pagar_display',
      'vencimiento_factoring','fecha_desembolso','fecha_pago','valor_venta',
      'porcentaje_ipoconsumo_venta','retenciones_venta','descuentos_venta',
@@ -2108,7 +2152,6 @@
                 costo_financiero_real_factoring_vehiculo: parseM(g('costo_financiero_real_factoring_vehiculo').value),
                 delta_flujo_caja_factoring: parseM(g('delta_flujo_caja_factoring').value),
                 costo_financiero_real_vehiculo: parseM(g('costo_financiero_real_vehiculo').value),
-                intereses_generados: parseM(g('intereses_generados').value),
                 comision_bancaria_vendedor: parseM(g('comision_bancaria_vendedor').value),
                 comision_bancaria_concesionario: parseM(g('comision_bancaria_concesionario').value),
                 utilidad_neta: parseM(g('utilidad_neta').value),
@@ -2152,11 +2195,14 @@
             if (snap.exists()) {
                 const data = snap.val();
                 todosLosRegistros = Object.entries(data).map(([id, v]) => ({ id, ...v }));
-                misRegistros = todosLosRegistros.filter(r => r.creado_por === currentUser?.uid || r.creado_por_email === currentUser?.email);
+                misRegistros = todosLosRegistros.filter(r => {
+                    if (currentUserSedes.length) return currentUserSedes.includes(r.sede);
+                    return r.creado_por === currentUser?.uid || r.creado_por_email === currentUser?.email;
+                });
                 misRegistros.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
             } else { todosLosRegistros = []; misRegistros = []; }
             renderizarMisRegistros();
-        } catch (e) { showNotification('Error al cargar registros', 'error'); }
+        } catch (e) { console.error(e); showNotification('Error al cargar registros', 'error'); }
         finally { hideLoader(); }
     }
 
@@ -2219,7 +2265,7 @@
                 todosLosRegistros.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
             } else { todosLosRegistros = []; }
             aplicarFiltrosAdmin();
-        } catch (e) { showNotification('Error al cargar registros', 'error'); }
+        } catch (e) { console.error(e); showNotification('Error al cargar registros', 'error'); }
         finally { hideLoader(); }
     }
 
@@ -2231,6 +2277,7 @@
         const fv = document.getElementById('filtro-vin-admin')?.value?.toLowerCase() || '';
         const ff = document.getElementById('filtro-factura-admin')?.value?.toLowerCase() || '';
         const filtered = todosLosRegistros.filter(r => {
+            if (currentUserSedes.length && !currentUserSedes.includes(r.sede)) return false;
             if (fc && !r.cliente?.toLowerCase().includes(fc)) return false;
             if (fe && r.estado !== fe) return false;
             if (fu && !r.creado_por_email?.toLowerCase().includes(fu)) return false;
@@ -2293,9 +2340,6 @@
             return new Date(r.vencimiento_factoring) < hoy;
         }).length;
         document.getElementById('total-leasing-vencido').textContent = leasingVencido;
-
-        const totalIntereses = registros.reduce((s, r) => s + (r.intereses_generados || 0), 0);
-        document.getElementById('total-intereses').textContent = formatMoney(totalIntereses);
 
         // ── TIMESTAMP ──
         document.getElementById('last-updated-text').textContent =
@@ -2470,7 +2514,7 @@
                 // Datos Financieros
                 'entidad_financiacion','fecha_desembolso_pago','valor_desembolso','valor_pagado','saldo',
                 'costo_financiero_factoring','dias_factoring','dias_flujo_caja','intereses_cargados_flujo_caja',
-                'costo_financiero_real_factoring_vehiculo','delta_flujo_caja_factoring','costo_financiero_real_vehiculo','intereses_generados',
+                'costo_financiero_real_factoring_vehiculo','delta_flujo_caja_factoring','costo_financiero_real_vehiculo',
                 'comision_bancaria_vendedor','comision_bancaria_concesionario','utilidad_neta','rentabilidad',
                 // Adicionales
                 'vendedor','vendedor_operacion','alterna','notas','observaciones'
@@ -2519,6 +2563,16 @@
     });
     recargarBtn?.addEventListener('click', cargarTodosLosRegistros);
 
+    // ── USER MANAGEMENT ──
+    document.getElementById('user-toggle')?.addEventListener('click', () => {
+        const body = document.getElementById('user-body');
+        const toggle = document.getElementById('user-toggle');
+        toggle.classList.toggle('open');
+        body.classList.toggle('open');
+        if (body.classList.contains('open')) cargarUsuarios();
+    });
+    document.getElementById('crear-usuario-btn')?.addEventListener('click', crearUsuario);
+
     // ── PAGINACIÓN MIS REGISTROS ──
     document.getElementById('mis-page-prev')?.addEventListener('click', () => { if (misPagina > 1) { misPagina--; renderizarMisRegistros(); } });
     document.getElementById('mis-page-next')?.addEventListener('click', () => { misPagina++; renderizarMisRegistros(); });
@@ -2526,7 +2580,7 @@
     // ── EXPORT EXCEL ──
     exportarExcelBtn?.addEventListener('click', () => {
         if (!todosLosRegistros.length) { showNotification('No hay datos para exportar', 'error'); return; }
-        // MODIFICACIÓN: se quitó Precio Neto, intereses_generados es calculado, matricula y soat son fechas
+        // MODIFICACIÓN: se quitó Precio Neto, Intereses Generados, matricula y soat son fechas
         const cols = ['Fecha Solicitud','Grupo','Marca','Descripcion','VIN','Bodega','Importador','Demo','AÑO',
             'Fecha Factura','No Factura','Vencimiento Factura','Días Faltantes Factura','Cantidad','Valor','% IVA','% IVA 3','IVA','Impoconsumo',
             'Valor Total','APOYO CCIAL','MARGEN VAR','No. NC','Costo Total','% Desc','Valor Desc',
@@ -2540,7 +2594,7 @@
             'Total Gastos','Fecha Entrega Final',
             'Entidad Financiación','Fecha Desembolso Pago','Valor Desembolso','Valor Pagado','Saldo',
             'Costo Financiero Factoring','Días Factoring','Días Flujo Caja','Intereses Cargados Flujo Caja',
-            'Costo Fin. Real Factoring Veh.','Delta Flujo Caja Factoring','Costo Fin. Real Vehículo','Intereses Generados',
+            'Costo Fin. Real Factoring Veh.','Delta Flujo Caja Factoring','Costo Fin. Real Vehículo',
             'Comisión Bancaria Vendedor','Comisión Bancaria Concesionario','Utilidad Neta','Rentabilidad',
             'Vendedor','Vendedor Operación','Alterna','Notas','Observaciones'];
         const rows = [cols];
@@ -2558,7 +2612,7 @@
             r.total_gastos,r.fecha_entrega_final,
             r.entidad_financiacion,r.fecha_desembolso_pago,r.valor_desembolso,r.valor_pagado,r.saldo,
             r.costo_financiero_factoring,r.dias_factoring,r.dias_flujo_caja,r.intereses_cargados_flujo_caja,
-            r.costo_financiero_real_factoring_vehiculo,r.delta_flujo_caja_factoring,r.costo_financiero_real_vehiculo,r.intereses_generados,
+            r.costo_financiero_real_factoring_vehiculo,r.delta_flujo_caja_factoring,r.costo_financiero_real_vehiculo,
             r.comision_bancaria_vendedor,r.comision_bancaria_concesionario,r.utilidad_neta,r.rentabilidad,
             r.vendedor,r.vendedor_operacion,r.alterna,r.notas,r.observaciones
         ].map(v => v ?? '')));
@@ -2913,16 +2967,91 @@
         } catch { return 'usuario'; }
     }
 
+    async function cargarUsuarios() {
+        try {
+            const snap = await database.ref('usuarios').once('value');
+            const tbody = document.getElementById('tabla-usuarios');
+            if (!snap.exists()) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3);">Sin usuarios registrados</td></tr>';
+                return;
+            }
+            const data = snap.val();
+            const todasSedes = ['CCC','CCG','Vehimotors Cartagena','Vehimotors Bucaramanga'];
+            tbody.innerHTML = Object.entries(data).map(([uid, u]) => {
+                const userSedes = u.sedes || [];
+                return `
+                <tr>
+                    <td>${u.email || '-'}</td>
+                    <td><select class="form-control user-rol-select" data-uid="${uid}" style="width:auto;display:inline-block;padding:4px 8px;font-size:12px;">
+                        <option value="usuario" ${u.rol === 'usuario' ? 'selected' : ''}>Usuario</option>
+                        <option value="admin" ${u.rol === 'admin' ? 'selected' : ''}>Admin</option>
+                    </select></td>
+                    <td style="font-size:12px;">
+                        ${todasSedes.map(s => `<label style="display:inline-flex;align-items:center;gap:3px;margin-right:8px;font-size:12px;white-space:nowrap;"><input type="checkbox" class="user-edit-sede" data-uid="${uid}" value="${s}" ${userSedes.includes(s) ? 'checked' : ''}> ${s}</label>`).join('')}
+                        ${!userSedes.length ? '<span style="color:var(--text3)">Todas</span>' : ''}
+                    </td>
+                    <td style="font-size:12px;color:var(--text3);">${u.fecha_registro ? new Date(u.fecha_registro).toLocaleDateString('es-CO') : '-'}</td>
+                    <td>
+                        <button class="btn btn-ghost btn-sm guardar-user-btn" data-uid="${uid}" style="font-size:11px;">Guardar</button>
+                    </td>
+                </tr>`;
+            }).join('');
+            document.querySelectorAll('.guardar-user-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const uid = btn.dataset.uid;
+                    const select = document.querySelector(`.user-rol-select[data-uid="${uid}"]`);
+                    const nuevoRol = select.value;
+                    const sedes = [...document.querySelectorAll(`.user-edit-sede[data-uid="${uid}"]:checked`)].map(cb => cb.value);
+                    await database.ref(`usuarios/${uid}`).update({ rol: nuevoRol, sedes });
+                    showNotification('Usuario actualizado');
+                });
+            });
+        } catch (e) { console.error(e); }
+    }
+
+    async function crearUsuario() {
+        const email = document.getElementById('new-user-email').value.trim();
+        const pw = document.getElementById('user-password').value;
+        const rol = document.getElementById('user-rol').value;
+        const sedes = [...document.querySelectorAll('.user-sede:checked')].map(cb => cb.value);
+        const msg = document.getElementById('user-msg');
+        if (!email || !pw) { msg.textContent = 'Email y contraseña requeridos'; msg.style.color = 'var(--red)'; return; }
+        if (pw.length < 6) { msg.textContent = 'Mínimo 6 caracteres'; msg.style.color = 'var(--red)'; return; }
+        try {
+            showLoader();
+            const cred = await auth.createUserWithEmailAndPassword(email, pw);
+            await database.ref(`usuarios/${cred.user.uid}`).set({ email, rol, sedes, fecha_registro: new Date().toISOString(), ultimo_acceso: new Date().toISOString() });
+            msg.textContent = 'Usuario creado exitosamente';
+            msg.style.color = 'var(--green)';
+            document.getElementById('new-user-email').value = '';
+            document.getElementById('user-password').value = '';
+            document.querySelectorAll('.user-sede').forEach(cb => cb.checked = false);
+            cargarUsuarios();
+        } catch (err) {
+            const msgs = { 'auth/email-already-in-use': 'Email ya registrado', 'auth/invalid-email': 'Email inválido', 'auth/weak-password': 'Contraseña muy débil' };
+            msg.textContent = msgs[err.code] || 'Error al crear usuario';
+            msg.style.color = 'var(--red)';
+        } finally { hideLoader(); }
+    }
+
     async function inicializarApp(user) {
         currentUser = user;
         userEmail.textContent = user.email;
         if (miEmail) miEmail.textContent = user.email;
-        const rol = await verificarRol(user);
-        currentUserRole = rol;
-        userRole.textContent = rol;
-        adminTab.style.display = rol === 'admin' ? 'block' : 'none';
+        const snap = await database.ref(`usuarios/${user.uid}`).once('value');
+        const userData = snap.val() || {};
+        currentUserRole = userData.rol || 'usuario';
+        currentUserSedes = userData.sedes || [];
+        const sedeFilter = document.getElementById('filtro-sede-admin');
+        if (sedeFilter) {
+            const todasSedes = ['CCC','CCG','Vehimotors Cartagena','Vehimotors Bucaramanga'];
+            const sedesOpts = currentUserSedes.length ? currentUserSedes : todasSedes;
+            sedeFilter.innerHTML = '<option value="">Todas</option>' + sedesOpts.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
+        userRole.textContent = currentUserRole;
+        adminTab.style.display = currentUserRole === 'admin' ? 'block' : 'none';
         cargarMisRegistros();
-        if (rol === 'admin') setTimeout(cargarTodosLosRegistros, 500);
+        if (currentUserRole === 'admin') setTimeout(cargarTodosLosRegistros, 500);
     }
 
     auth.onAuthStateChanged(async user => {
