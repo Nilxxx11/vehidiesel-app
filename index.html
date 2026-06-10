@@ -1702,6 +1702,10 @@
                         <input type="text" id="filtro-factura-admin" class="form-control" placeholder="No. Factura importador">
                     </div>
                     <div class="form-group">
+                        <label>Filtrar por Factoring</label>
+                        <input type="text" id="filtro-factoring-admin" class="form-control" placeholder="Entidad factoring">
+                    </div>
+                    <div class="form-group">
                         <label>Filtrar por usuario</label>
                         <input type="text" id="filtro-usuario" class="form-control" placeholder="Email del creador">
                     </div>
@@ -2273,6 +2277,7 @@
         const fs = document.getElementById('filtro-sede-admin')?.value || '';
         const fv = document.getElementById('filtro-vin-admin')?.value?.toLowerCase() || '';
         const ff = document.getElementById('filtro-factura-admin')?.value?.toLowerCase() || '';
+        const ffactor = document.getElementById('filtro-factoring-admin')?.value?.toLowerCase() || '';
         const filtered = todosLosRegistros.filter(r => {
             if (currentUserSedes.length && !currentUserSedes.includes(r.sede)) return false;
             if (fc && !r.cliente?.toLowerCase().includes(fc)) return false;
@@ -2281,6 +2286,7 @@
             if (fs && r.sede !== fs) return false;
             if (fv && !r.vin?.toLowerCase().includes(fv)) return false;
             if (ff && !r.no_factura?.toLowerCase().includes(ff)) return false;
+            if (ffactor && !r.factoring?.toLowerCase().includes(ffactor)) return false;
             return true;
         });
         renderizarTablaAdmin(filtered);
@@ -2553,9 +2559,10 @@
     document.getElementById('filtro-sede-admin')?.addEventListener('change', aplicarFiltrosAdmin);
     document.getElementById('filtro-vin-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-factura-admin')?.addEventListener('input', aplicarFiltrosAdmin);
+    document.getElementById('filtro-factoring-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-usuario')?.addEventListener('input', aplicarFiltrosAdmin);
     limpiarFiltrosAdmin?.addEventListener('click', () => {
-        ['filtro-cliente-admin','filtro-estado-admin','filtro-sede-admin','filtro-vin-admin','filtro-factura-admin','filtro-usuario'].forEach(id => document.getElementById(id).value = '');
+        ['filtro-cliente-admin','filtro-estado-admin','filtro-sede-admin','filtro-vin-admin','filtro-factura-admin','filtro-factoring-admin','filtro-usuario'].forEach(id => document.getElementById(id).value = '');
         aplicarFiltrosAdmin();
     });
     recargarBtn?.addEventListener('click', cargarTodosLosRegistros);
