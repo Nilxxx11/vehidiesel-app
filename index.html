@@ -3030,7 +3030,7 @@
             document.getElementById('new-user-email').value = '';
             document.getElementById('user-password').value = '';
             document.querySelectorAll('.user-sede').forEach(cb => cb.checked = false);
-            cargarUsuarios();
+            setTimeout(() => { hideLoader(); auth.signOut(); }, 800);
         } catch (err) {
             const msgs = { 'auth/email-already-in-use': 'Email ya registrado', 'auth/invalid-email': 'Email inválido', 'auth/weak-password': 'Contraseña muy débil' };
             msg.textContent = msgs[err.code] || 'Error al crear usuario';
@@ -3042,7 +3042,11 @@
         currentUser = user;
         userEmail.textContent = user.email;
         if (miEmail) miEmail.textContent = user.email;
-        const snap = await database.ref(`usuarios/${user.uid}`).once('value');
+        let snap = await database.ref(`usuarios/${user.uid}`).once('value');
+        if (!snap.exists()) {
+            await new Promise(r => setTimeout(r, 1500));
+            snap = await database.ref(`usuarios/${user.uid}`).once('value');
+        }
         const userData = snap.val() || {};
         currentUserRole = userData.rol || 'usuario';
         currentUserSedes = userData.sedes || [];
