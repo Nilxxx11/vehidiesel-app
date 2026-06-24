@@ -1924,8 +1924,8 @@
         document.getElementById('porcentaje_utilidad').value = pctUtilidad.toFixed(2);
 
         // ── Factoring ──
-        document.getElementById('valor_factoring').value = formatMoney(valor);
-        const valorFactoring = valor;
+        document.getElementById('valor_factoring').value = formatMoney(valorTotalCalc);
+        const valorFactoring = valorTotalCalc;
         const valorAPagar = parseMoney(document.getElementById('valor_a_pagar_display')?.value);
 
         const interesesFactoring = valorAPagar - valorFactoring;
@@ -2748,9 +2748,13 @@
         try {
             showLoader();
             importProgressFill.style.width = '10%';
+
+            const snap = await database.ref('registros').once('value');
+            const existentes = snap.exists() ? Object.values(snap.val()) : [];
+            const vinsExistentes = new Set(existentes.map(r => r.vin).filter(Boolean));
             
             const total = datosImportacion.length;
-            let ok = 0, fail = 0;
+            let ok = 0, fail = 0, dup = 0;
             
             for (let i = 0; i < datosImportacion.length; i++) {
                 try {
@@ -2762,6 +2766,9 @@
                         timestamp: Date.now(),
                         uid: datosImportacion[i].uid || null
                     };
+                    
+                    if (reg.vin && vinsExistentes.has(reg.vin)) { dup++; continue; }
+                    if (reg.vin) vinsExistentes.add(reg.vin);
                     
                     if (reg.uid) {
                         await database.ref(`registros/${reg.uid}`).set(reg);
@@ -2777,7 +2784,7 @@
             }
             
             importProgressFill.style.width = '100%';
-            importResult.textContent = `Importación completada: ${ok} registros importados, ${fail} fallidos`;
+            importResult.textContent = `Importación completada: ${ok} nuevos, ${dup} duplicados omitidos, ${fail} fallidos`;
             
             datosImportacion = [];
             importFile.value = '';
