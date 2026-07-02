@@ -663,25 +663,25 @@
         .legend-item .legend-val { color: var(--text); font-family: 'DM Mono', monospace; font-size: 11px; }
         .legend-item .legend-pct { color: var(--text3); font-size: 10px; }
 
-        /* Sede pills */
-        .sede-grid { display: flex; flex-direction: column; gap: 10px; }
-        .sede-item {
+        /* Bodega pills */
+        .bodega-grid { display: flex; flex-direction: column; gap: 10px; }
+        .bodega-item {
             background: var(--surface2);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 12px 16px;
             display: flex; align-items: center; gap: 12px;
         }
-        .sede-icon {
+        .bodega-icon {
             width: 32px; height: 32px;
             border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
             font-size: 14px; flex-shrink: 0;
         }
-        .sede-info { flex: 1; }
-        .sede-name { font-size: 12px; font-weight: 600; color: var(--text); }
-        .sede-count { font-size: 10px; color: var(--text3); margin-top: 2px; }
-        .sede-value { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 600; color: var(--accent); }
+        .bodega-info { flex: 1; }
+        .bodega-name { font-size: 12px; font-weight: 600; color: var(--text); }
+        .bodega-count { font-size: 10px; color: var(--text3); margin-top: 2px; }
+        .bodega-value { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 600; color: var(--accent); }
 
         /* Alertas leasing */
         .alert-list { display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto; }
@@ -1531,10 +1531,10 @@
                     <div class="bar-chart" id="chart-top-clientes"></div>
                 </div>
 
-                <!-- Distribución por Sede -->
+                <!-- Distribución por Bodega -->
                 <div class="dash-card">
-                    <div class="dash-card-title">🏢 Por Sede <span>volumen</span></div>
-                    <div class="sede-grid" id="chart-sedes"></div>
+                    <div class="dash-card-title">🏢 Por Bodega <span>volumen</span></div>
+                    <div class="bodega-grid" id="chart-bodegas"></div>
                 </div>
 
                 <!-- Ranking vendedores -->
@@ -1639,12 +1639,12 @@
                             </div>
                         </div>
                         <div style="margin-bottom:12px;">
-                            <label style="display:block;margin-bottom:6px;font-size:12px;color:var(--text2);">Sedes a las que tiene acceso</label>
+                            <label style="display:block;margin-bottom:6px;font-size:12px;color:var(--text2);">Bodegas a las que tiene acceso</label>
                             <div style="display:flex;gap:16px;flex-wrap:wrap;">
-                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="CCC"> CCC</label>
-                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="CCG"> CCG</label>
-                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="Vehimotors Cartagena"> Vehimotors Cartagena</label>
-                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-sede" value="Vehimotors Bucaramanga"> Vehimotors Bucaramanga</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-bodega" value="CCC"> CCC</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-bodega" value="CCG"> CCG</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-bodega" value="Vehimotors Cartagena"> Vehimotors Cartagena</label>
+                                <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="user-bodega" value="Vehimotors Bucaramanga"> Vehimotors Bucaramanga</label>
                             </div>
                         </div>
                         <div class="action-row">
@@ -1657,7 +1657,7 @@
                         <div class="table-wrapper">
                             <table>
                                 <thead>
-                                    <tr><th>Email</th><th>Rol</th><th>Sedes</th><th>Fecha Registro</th><th>Acciones</th></tr>
+                                    <tr><th>Email</th><th>Rol</th><th>Bodegas</th><th>Fecha Registro</th><th>Acciones</th></tr>
                                 </thead>
                                 <tbody id="tabla-usuarios">
                                     <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3);">Cargando usuarios...</td></tr>
@@ -1688,8 +1688,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Filtrar por sede</label>
-                        <select id="filtro-sede-admin" class="form-control">
+                        <label>Filtrar por bodega</label>
+                        <select id="filtro-bodega-admin" class="form-control">
                             <option value="">Todas</option>
                         </select>
                     </div>
@@ -1719,7 +1719,7 @@
                                 <th>Cliente</th>
                                 <th>Descripción</th>
                                 <th>Marca</th>
-                                <th>Sede</th>
+                                <th>Bodega</th>
                                 <th>Precio+IVA</th>
                                 <th>Margen</th>
                                 <th>Estado</th>
@@ -1813,7 +1813,7 @@
     const importResult = document.getElementById('import-result');
     const importError = document.getElementById('import-error');
 
-    let currentUser = null, currentUserRole = null, currentUserSedes = [];
+    let currentUser = null, currentUserRole = null, currentUserBodegas = [];
     let todosLosRegistros = [], misRegistros = [];
     let registroEnEdicion = null;
     let misPagina = 1;
@@ -2175,6 +2175,12 @@
                 timestamp: Date.now()
             };
 
+            if (!registro.bodega) {
+                hideLoader();
+                showNotification('La bodega es obligatoria', 'error');
+                return;
+            }
+
             if (registroEnEdicion) {
                 await database.ref(`registros/${registroEnEdicion}`).update(registro);
                 showNotification('Registro actualizado correctamente');
@@ -2277,16 +2283,16 @@
         const fc = document.getElementById('filtro-cliente-admin')?.value?.toLowerCase() || '';
         const fe = document.getElementById('filtro-estado-admin')?.value || '';
         const fu = document.getElementById('filtro-usuario')?.value?.toLowerCase() || '';
-        const fs = document.getElementById('filtro-sede-admin')?.value || '';
+        const fb = document.getElementById('filtro-bodega-admin')?.value || '';
         const fv = document.getElementById('filtro-vin-admin')?.value?.toLowerCase() || '';
         const ff = document.getElementById('filtro-factura-admin')?.value?.toLowerCase() || '';
         const ffactor = document.getElementById('filtro-factoring-admin')?.value?.toLowerCase() || '';
         const filtered = todosLosRegistros.filter(r => {
-            if (currentUserSedes.length && !currentUserSedes.includes(r.sede)) return false;
+            if (currentUserBodegas.length && !currentUserBodegas.includes(r.bodega)) return false;
             if (fc && !r.cliente?.toLowerCase().includes(fc)) return false;
             if (fe && r.estado !== fe) return false;
             if (fu && !r.creado_por_email?.toLowerCase().includes(fu)) return false;
-            if (fs && r.sede !== fs) return false;
+            if (fb && r.bodega !== fb) return false;
             if (fv && !r.vin?.toLowerCase().includes(fv)) return false;
             if (ff && !r.no_factura?.toLowerCase().includes(ff)) return false;
             if (ffactor && !r.factoring?.toLowerCase().includes(ffactor)) return false;
@@ -2313,7 +2319,7 @@
                     <td>${r.cliente || '-'}</td>
                     <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;">${r.descripcion || '-'}</td>
                     <td>${r.marca || '-'}</td>
-                    <td><span style="font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:5px;">${r.sede || '-'}</span></td>
+                    <td><span style="font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:5px;">${r.bodega || '-'}</span></td>
                     <td class="td-mono">${formatMoney(r.valor_total_venta || 0)}</td>
                     <td class="td-mono" style="color:var(--green)">${formatMoney(r.margen_var || 0)}</td>
                     <td><span class="badge badge-${r.estado || 'Pendiente'}">${r.estado || 'Pendiente'}</span></td>
@@ -2371,33 +2377,33 @@
                 </div>
             `).join('');
 
-        // ── SEDES ──
-        const sedeConfig = {
+        // ── BODEGAS ──
+        const bodegaConfig = {
             'CCC':       { icon: '🏬', bg: 'rgba(79,127,255,0.12)' },
             'CCG':       { icon: '🏢', bg: 'rgba(201,168,92,0.12)' },
             'Vehimotors Cartagena':{ icon: '🚗', bg: 'rgba(34,199,142,0.12)' },
             'Vehimotors Bucaramanga':{ icon: '🚙', bg: 'rgba(0,212,200,0.12)' },
-            'Sin sede':  { icon: '📍', bg: 'rgba(84,95,122,0.12)' },
+            'Sin bodega':  { icon: '📍', bg: 'rgba(84,95,122,0.12)' },
         };
-        const sedes = {};
+        const bodegas = {};
         registros.forEach(r => {
-            const s = r.sede || 'Sin sede';
-            if (!sedes[s]) sedes[s] = { count: 0, margen: 0 };
-            sedes[s].count++;
-            sedes[s].margen += (r.margen_var || 0);
+            const b = r.bodega || 'Sin bodega';
+            if (!bodegas[b]) bodegas[b] = { count: 0, margen: 0 };
+            bodegas[b].count++;
+            bodegas[b].margen += (r.margen_var || 0);
         });
-        document.getElementById('chart-sedes').innerHTML = Object.entries(sedes).length === 0
+        document.getElementById('chart-bodegas').innerHTML = Object.entries(bodegas).length === 0
             ? '<p style="color:var(--text3);font-size:12px;">Sin datos</p>'
-            : Object.entries(sedes).sort((a,b) => b[1].count - a[1].count).map(([s, d]) => {
-                const cfg = sedeConfig[s] || sedeConfig['Sin sede'];
+            : Object.entries(bodegas).sort((a,b) => b[1].count - a[1].count).map(([b, d]) => {
+                const cfg = bodegaConfig[b] || bodegaConfig['Sin bodega'];
                 return `
-                <div class="sede-item">
-                    <div class="sede-icon" style="background:${cfg.bg}">${cfg.icon}</div>
-                    <div class="sede-info">
-                        <div class="sede-name">${s}</div>
-                        <div class="sede-count">${d.count} vehículo${d.count !== 1 ? 's' : ''}</div>
+                <div class="bodega-item">
+                    <div class="bodega-icon" style="background:${cfg.bg}">${cfg.icon}</div>
+                    <div class="bodega-info">
+                        <div class="bodega-name">${b}</div>
+                        <div class="bodega-count">${d.count} vehículo${d.count !== 1 ? 's' : ''}</div>
                     </div>
-                    <div class="sede-value">${formatMoney(d.margen)}</div>
+                    <div class="bodega-value">${formatMoney(d.margen)}</div>
                 </div>`;
             }).join('');
 
@@ -2559,13 +2565,13 @@
     document.getElementById('filtro-estado-mis')?.addEventListener('change', () => { misPagina = 1; renderizarMisRegistros(); });
     document.getElementById('filtro-cliente-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-estado-admin')?.addEventListener('change', aplicarFiltrosAdmin);
-    document.getElementById('filtro-sede-admin')?.addEventListener('change', aplicarFiltrosAdmin);
+    document.getElementById('filtro-bodega-admin')?.addEventListener('change', aplicarFiltrosAdmin);
     document.getElementById('filtro-vin-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-factura-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-factoring-admin')?.addEventListener('input', aplicarFiltrosAdmin);
     document.getElementById('filtro-usuario')?.addEventListener('input', aplicarFiltrosAdmin);
     limpiarFiltrosAdmin?.addEventListener('click', () => {
-        ['filtro-cliente-admin','filtro-estado-admin','filtro-sede-admin','filtro-vin-admin','filtro-factura-admin','filtro-factoring-admin','filtro-usuario'].forEach(id => document.getElementById(id).value = '');
+        ['filtro-cliente-admin','filtro-estado-admin','filtro-bodega-admin','filtro-vin-admin','filtro-factura-admin','filtro-factoring-admin','filtro-usuario'].forEach(id => document.getElementById(id).value = '');
         aplicarFiltrosAdmin();
     });
     recargarBtn?.addEventListener('click', cargarTodosLosRegistros);
@@ -2990,9 +2996,9 @@
                 return;
             }
             const data = snap.val();
-            const todasSedes = ['CCC','CCG','Vehimotors Cartagena','Vehimotors Bucaramanga'];
+            const todasBodegas = ['CCC','CCG','Vehimotors Cartagena','Vehimotors Bucaramanga'];
             tbody.innerHTML = Object.entries(data).map(([uid, u]) => {
-                const userSedes = u.sedes || [];
+                const userBodegas = u.sedes || [];
                 return `
                 <tr>
                     <td>${u.email || '-'}</td>
@@ -3001,8 +3007,8 @@
                         <option value="admin" ${u.rol === 'admin' ? 'selected' : ''}>Admin</option>
                     </select></td>
                     <td style="font-size:12px;">
-                        ${todasSedes.map(s => `<label style="display:inline-flex;align-items:center;gap:3px;margin-right:8px;font-size:12px;white-space:nowrap;"><input type="checkbox" class="user-edit-sede" data-uid="${uid}" value="${s}" ${userSedes.includes(s) ? 'checked' : ''}> ${s}</label>`).join('')}
-                        ${!userSedes.length ? '<span style="color:var(--text3)">Todas</span>' : ''}
+                        ${todasBodegas.map(b => `<label style="display:inline-flex;align-items:center;gap:3px;margin-right:8px;font-size:12px;white-space:nowrap;"><input type="checkbox" class="user-edit-bodega" data-uid="${uid}" value="${b}" ${userBodegas.includes(b) ? 'checked' : ''}> ${b}</label>`).join('')}
+                        ${!userBodegas.length ? '<span style="color:var(--text3)">Todas</span>' : ''}
                     </td>
                     <td style="font-size:12px;color:var(--text3);">${u.fecha_registro ? new Date(u.fecha_registro).toLocaleDateString('es-CO') : '-'}</td>
                     <td>
@@ -3015,8 +3021,8 @@
                     const uid = btn.dataset.uid;
                     const select = document.querySelector(`.user-rol-select[data-uid="${uid}"]`);
                     const nuevoRol = select.value;
-                    const sedes = [...document.querySelectorAll(`.user-edit-sede[data-uid="${uid}"]:checked`)].map(cb => cb.value);
-                    await database.ref(`usuarios/${uid}`).update({ rol: nuevoRol, sedes });
+                    const bodegas = [...document.querySelectorAll(`.user-edit-bodega[data-uid="${uid}"]:checked`)].map(cb => cb.value);
+                    await database.ref(`usuarios/${uid}`).update({ rol: nuevoRol, sedes: bodegas });
                     showNotification('Usuario actualizado');
                 });
             });
@@ -3027,19 +3033,19 @@
         const email = document.getElementById('new-user-email').value.trim();
         const pw = document.getElementById('user-password').value;
         const rol = document.getElementById('user-rol').value;
-        const sedes = [...document.querySelectorAll('.user-sede:checked')].map(cb => cb.value);
+        const bodegas = [...document.querySelectorAll('.user-bodega:checked')].map(cb => cb.value);
         const msg = document.getElementById('user-msg');
         if (!email || !pw) { msg.textContent = 'Email y contraseña requeridos'; msg.style.color = 'var(--red)'; return; }
         if (pw.length < 6) { msg.textContent = 'Mínimo 6 caracteres'; msg.style.color = 'var(--red)'; return; }
         try {
             showLoader();
             const cred = await auth.createUserWithEmailAndPassword(email, pw);
-            await database.ref(`usuarios/${cred.user.uid}`).set({ email, rol, sedes, fecha_registro: new Date().toISOString(), ultimo_acceso: new Date().toISOString() });
+            await database.ref(`usuarios/${cred.user.uid}`).set({ email, rol, sedes: bodegas, fecha_registro: new Date().toISOString(), ultimo_acceso: new Date().toISOString() });
             msg.textContent = 'Usuario creado exitosamente';
             msg.style.color = 'var(--green)';
             document.getElementById('new-user-email').value = '';
             document.getElementById('user-password').value = '';
-            document.querySelectorAll('.user-sede').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.user-bodega').forEach(cb => cb.checked = false);
             setTimeout(() => { hideLoader(); auth.signOut(); }, 800);
         } catch (err) {
             const msgs = { 'auth/email-already-in-use': 'Email ya registrado', 'auth/invalid-email': 'Email inválido', 'auth/weak-password': 'Contraseña muy débil' };
@@ -3059,12 +3065,12 @@
         }
         const userData = snap.val() || {};
         currentUserRole = userData.rol || 'usuario';
-        currentUserSedes = userData.sedes || [];
-        const sedeFilter = document.getElementById('filtro-sede-admin');
-        if (sedeFilter) {
-            const todasSedes = ['CCC','CCG','Vehimotors Cartagena','Vehimotors Bucaramanga'];
-            const sedesOpts = currentUserSedes.length ? currentUserSedes : todasSedes;
-            sedeFilter.innerHTML = '<option value="">Todas</option>' + sedesOpts.map(s => `<option value="${s}">${s}</option>`).join('');
+        currentUserBodegas = userData.sedes || [];
+        const bodegaFilter = document.getElementById('filtro-bodega-admin');
+        if (bodegaFilter) {
+            const todasBodegas = ['CCC','CCG','Vehimotors Cartagena','Vehimotors Bucaramanga'];
+            const bodegasOpts = currentUserBodegas.length ? currentUserBodegas : todasBodegas;
+            bodegaFilter.innerHTML = '<option value="">Todas</option>' + bodegasOpts.map(b => `<option value="${b}">${b}</option>`).join('');
         }
         userRole.textContent = currentUserRole;
         adminTab.style.display = currentUserRole === 'admin' ? 'block' : 'none';
